@@ -1,4 +1,17 @@
 from django.shortcuts import render
+from rest_framework import viewsets
 
-def index(request):
-	return render("test")
+from .serializers import EventSerializer, PlaceSerializer, AdressSerializer
+from .models import Event, Place, Adress
+
+class EventViewSet(viewsets.ModelViewSet):
+	queryset = Event.objects.all().order_by('description')
+	serializer_class = EventSerializer
+
+class PlaceViewSet(viewsets.ModelViewSet):
+	queryset = Place.objects.all()
+	serializer_class = PlaceSerializer
+
+class AdressViewSet(viewsets.ModelViewSet):
+	queryset = Adress.objects.all()
+	serializer_class = AdressSerializer
