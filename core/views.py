@@ -10,7 +10,12 @@ def index(request):
 	return render(request, 'core/index.html', {'cards': cards})
 
 class EventListView(ListView):
+	paginate_by = 25
 	model = Event
+
+class PlaceListView(ListView):
+	paginate_by = 25
+	model = Place
 
 
 class EventViewSet(viewsets.ModelViewSet):

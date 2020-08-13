@@ -2,12 +2,15 @@
 
 
 {% block content %}
-<h2>События</h2>
+<h2>Места</h2>
 <ul>
-	{% for event in object_list %}
-	<li>{{ event.date }}</li>
+	{% for place in object_list %}
+	<li>{{ place.name }}</li>
 	{% endfor %}
 </ul>
+
+
+
 
 <nav aria-label="Page navigation example">
   <ul class="pagination">

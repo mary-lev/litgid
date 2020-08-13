@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 from . import views
-from .views import EventListView
+from .views import EventListView, PlaceListView
 
 
 router = routers.DefaultRouter()
@@ -13,6 +13,7 @@ router.register(r'adresses', views.AdressViewSet)
 urlpatterns = [
 	path('', views.index, name='index'),
 	path('event/', EventListView.as_view()),
+	path('place/', PlaceListView.as_view()),
 	path('api/', include(router.urls)),
 	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
