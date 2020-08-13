@@ -14,7 +14,6 @@ class Person(models.Model):
 
 
 class Adress(models.Model):
-	
 	name = models.CharField(max_length=300)
 	coordinates = models.CharField(max_length=300, blank=True, null=True)
 
