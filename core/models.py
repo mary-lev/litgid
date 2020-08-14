@@ -36,6 +36,15 @@ class Place(models.Model):
 	def __str__(self):
 		return self.name
 
+	def get_events(self):
+		events = Event.objects.filter(place=self).order_by('date')
+		return events
+
+	def get_adresses(self):
+		events = Event.objects.filter(place=self).values_list('adress', flat=True).order_by('id')
+		adresses = Adress.objects.filter(id__in=events)
+		return adresses
+
 
 class Event(models.Model):
 	description = models.TextField()

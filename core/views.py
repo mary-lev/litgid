@@ -32,11 +32,13 @@ class PlaceDetailView(DetailView):
 class EventListView(ListView):
 	paginate_by = 25
 	model = Event
+	queryset = Event.objects.order_by('date')
 
 
 class PlaceListView(ListView):
 	paginate_by = 25
 	model = Place
+	queryset = Place.objects.order_by('name')
 
 
 # CLasses for API

@@ -8,9 +8,13 @@
     {{ object.name }}
   </div>
   <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>{{ object.event.name }}</p>
-      <footer class="blockquote-footer">{{ object.name }} / <cite title="Source Title">{{ object.adress.name }}</cite></footer>
+    <blockquote class="blockquote mb-0"><small>
+      <ul>
+      {% for event in object.get_events %}
+      <li><b>{{ event.date }}</b> {{event.description|truncatewords:20}} </li>
+      {% endfor %}</small>
+    </ul>
+      <footer class="blockquote-footer">{{ object.name }} {% for adress in object.get_adresses %} <cite title="Source Title">{{ adress.name }} / {% endfor %} </cite></footer>
     </blockquote>
   </div>
 </div>
