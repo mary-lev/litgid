@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
 
 {% block content %}
-<h2>Места</h2>
+<h1 class="display-4">Места</h1>
 <ul>
 	{% for place in object_list %}
-	<li>{{ place.name }}</li>
+	<li><a href="{% url 'core:one_place' place.id %}">{{ place.name }}</a></li>
 	{% endfor %}
 </ul>
 

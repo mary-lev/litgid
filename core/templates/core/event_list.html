@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'page.html' %}
 
 
 {% block content %}
-<h2>События</h2>
+<h1 class="display-4">События</h1>
 <ul>
 	{% for event in object_list %}
-	<li>{{ event.date }}</li>
+	<li><b>{{ event.date }}</b>. <a href="{% url 'core:one_event' event.id %}">{{ event.description|truncatewords:10 }}</a> <em> {{ event.place.name }} </em></li>
 	{% endfor %}
 </ul>
 
