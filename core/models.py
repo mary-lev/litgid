@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Person(models.Model):
 	name = models.CharField(max_length=300)
@@ -38,7 +39,7 @@ class Place(models.Model):
 
 class Event(models.Model):
 	description = models.TextField()
-	date = models.CharField(max_length=300, blank=True, null=True)
+	date = models.DateTimeField(auto_now=False, auto_now_add=False)
 	place = models.ForeignKey(Place, on_delete=models.CASCADE, blank=True, null=True)
 	adress = models.ForeignKey(Adress, on_delete=models.CASCADE, blank=True, null=True)
 	people = models.ManyToManyField(Person, blank=True)
@@ -49,6 +50,9 @@ class Event(models.Model):
 
 	def __str__(self):
 		return self.description
+
+	def get_absolute_url(self):
+		return reverse('core:one_event', args=[self.id])
 
 
 

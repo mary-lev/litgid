@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+<meta charset='utf-8' />
+<link rel='stylesheet' type='text/css' href='{% static "fullcalendar.css" %}' />
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+
+
+<!--[if lt IE 9]>
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<!--<![endif]--><script type='text/javascript' src='{% static "fullcalendar.min.js" %}'></script>
+
+</head>
+
+<!--[if HTML5]><![endif]-->
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]><html class="ie ie6 ie-lte9 ie-lte8 ie-lte7 no-js" lang="ru"> <![endif]-->
+<!--[if IE 7]><html class="ie ie7 ie-lte9 ie-lte8 ie-lte7 no-js" lang="ru"> <![endif]-->
+<!--[if IE 8]><html class="ie ie8 ie-lte9 ie-lte8 no-js" lang="ru"> <![endif]-->
+<!--[if IE 9]><html class="ie9 ie-lte9 no-js" lang="ru"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="ru"> <!--<![endif]-->
+<head>
+<title>Test</title>
+  <!--[if !HTML5]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <![endif]-->
+  <!-- www.phpied.com/conditional-comments-block-downloads/ -->
+  <!-- Always force latest IE rendering engine
+       (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+
+  <meta charset="utf-8" />
+
+  <!-- http://dev.w3.org/html5/markup/meta.name.html -->
+  <meta name="application-name" content="test" />
+
+  <!-- Speaking of Google, don't forget to set your site up:
+       http://google.com/webmasters -->
+  <meta name="google-site-verification" content="" />
+
+  <!--  Mobile Viewport Fix
+        j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag
+        device-width: Occupy full width of the screen in its current orientation
+        initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
+        user-scalable = yes allows the user to zoom in -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- All JavaScript at the bottom, except for Modernizr which enables
+       HTML5 elements & feature detects -->
+  <script src="{% load static %}/modernizr.custom.js"></script>
+
+  <!-- include stylesheets -->
+  
+
+  
+<meta name="keywords" content="concordance, natural language processing, russian poetry" />
+
+<meta name="generator" content="Частотный словарь русской литературы" />
+
+<meta name="author" content="Maria Levchenko &lt;marylevchenko@gmail.com&gt;" />
+
+</head>
+
+<body>
+  <div class="container">
+    <!-- Masthead ================================================== -->
+    <header class="mastheader row" id="header">
+  	
+    </header>
+
+    <section id="main" class="main row">
+        
+
+        <div class="span12">
+            
+            
+
+<div id="#calendar"></div>
+
+<script>
+
+	$(document).ready(function() {
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month'
+			},
+            defaultDate: '2015-01-01',
+			defaultView: 'month',
+			editable: true,
+			events: [
+        {% for event in events %} 
+				{
+                title: {{ event.place.name }},
+                start: {{ event.date }},
+                url: "http://concordance.pythonanywhere.com/test/show/show1/354"
+				},
+        {% endfor %}
+				{
+                title: "Блок.  Придут незаметные белые ночи... ",
+                start: "2015-03-18",
+                url: "http://concordance.pythonanywhere.com/test/show/show1/355"
+				},              
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2014-06-28'
+				}
+			]
+		});
+
+	});
+
+</script>
+</head>
+<body><center><h3>Хронология текстов</h3>
+  <h4>  
+    <a href="/test/calendar/year/1900">1900</a>
+    
+    <a href="/test/calendar/year/1901">1901</a>
+    
+    <a href="/test/calendar/year/1902">1902</a>
+    
+    <a href="/test/calendar/year/1903">1903</a>
+    
+    <a href="/test/calendar/year/1904">1904</a>
+    
+    <a href="/test/calendar/year/1905">1905</a>
+    
+    <a href="/test/calendar/year/1906">1906</a>
+    
+    <a href="/test/calendar/year/1907">1907</a>
+    
+    <a href="/test/calendar/year/1908">1908</a>
+    
+    <a href="/test/calendar/year/1909">1909</a>
+    
+    <a href="/test/calendar/year/1910">1910</a>
+    
+    <a href="/test/calendar/year/1911">1911</a>
+    
+    <a href="/test/calendar/year/1912">1912</a>
+    
+    <a href="/test/calendar/year/1913">1913</a>
+    
+    <a href="/test/calendar/year/1914">1914</a>
+    
+    <a href="/test/calendar/year/1915">1915</a>
+    
+    <a href="/test/calendar/year/1916">1916</a>
+    </h4> </center>
+<div id='calendar'></div>
+
+</body>
+</html>
+
+            
+        </div>
+
+        
+    </section><!--/main-->
+
+    
+  </div> 
+
+{% endblock %}
+</body>

@@ -1,6 +1,6 @@
 from rest_framework import serializers
-
 from .models import Event, Place, Adress
+
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
 	url = serializers.HyperlinkedIdentityField(view_name='core:event-detail')
@@ -16,6 +16,7 @@ class PlaceSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Place
 		fields = "__all__"
+
 
 class AdressSerializer(serializers.HyperlinkedModelSerializer):
 	url = serializers.HyperlinkedIdentityField(view_name='core:adress-detail')
