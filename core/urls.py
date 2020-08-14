@@ -13,7 +13,6 @@ app_name = 'core'
 urlpatterns = [
 	path('', views.index, name='index'),
 	path('calendar/<int:year>/<int:month>', views.new_calendar, name='calendar'),
-	path('calendar_test/<str:year>', views.calendar_test, name='calendar_test'),
 	path('places', PlaceListView.as_view(), name='places'),
 	path('events', EventListView.as_view(), name='events'),
 	path('event/<pk>/', EventDetailView.as_view(), name='one_event'),

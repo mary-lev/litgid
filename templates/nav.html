@@ -1,0 +1,60 @@
+<div class='container'>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'core:index' %}">SPbLitGuide</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:events' %}">События</a>
+      </li>
+       <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:places' %}">Места</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Календарь
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'core:calendar' 1999 1 %}">1999</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2000 1 %}">2000</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2001 1 %}">2001</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2002 1 %}">2002</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2003 1 %}">2003</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2004 1 %}">2004</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2005 1 %}">2005</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2006 1 %}">2006</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2007 1 %}">2007</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2008 1 %}">2008</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2009 1 %}">2009</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2010 1 %}">2010</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2011 1 %}">2011</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2012 1 %}">2012</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2013 1 %}">2013</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2014 1 %}">2014</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2015 1 %}">2015</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2016 1 %}">2016</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2017 1 %}">2017</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2018 1 %}">2018</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2019 1 %}">2019</a>
+          <a class="dropdown-item" href="{% url 'core:calendar' 2020 1 %}">2020</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Карта</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
