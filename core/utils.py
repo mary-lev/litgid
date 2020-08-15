@@ -4,6 +4,8 @@ from itertools import groupby
 
 from django.utils.html import conditional_escape as esc
 
+month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+
 class EventCalendar(HTMLCalendar):
 
     def __init__(self, events):
@@ -35,7 +37,14 @@ class EventCalendar(HTMLCalendar):
             return self.day_cell(cssclass, day)
         return self.day_cell('noday', '&nbsp;')
 
-
+    def formatmonthname(self, year, month, withyear=True):
+        """
+        Return a month name as a table row.
+        """
+        s = '%s %s' % (month_name[month], year)
+        return '<tr><th colspan="7" class="%s">%s</th></tr>' % (
+            self.cssclass_month_head, s)
+    
     def formatmonth(self, year, month):
         self.year, self.month = year, month
         return super(EventCalendar, self).formatmonth(year, month)
@@ -47,5 +56,5 @@ class EventCalendar(HTMLCalendar):
         )
 
     def day_cell(self, cssclass, body):
-        return '<td class="%s" style="word-wrap: \
-        break-word;min-width: 160px;max-width: 160px;"><small>%s</small></td>' % (cssclass, body)
+        return '<td class="%s" style="word-wrap: break-word;min-width: \
+                160px;max-width: 160px;"><small>%s</small></td>' % (cssclass, body)
