@@ -41,9 +41,11 @@ class EventCalendar(HTMLCalendar):
         """
         Return a month name as a table row.
         """
-        s = '%s %s' % (month_name[month], year)
-        return '<tr><th colspan="7" class="%s">%s</th></tr>' % (
-            self.cssclass_month_head, s)
+        current_month = '%s %s' % (month_name[month], year)
+        previous_month = '%s %s' % (month_name[month-1], year)
+        next_month = '% s %s' % (month_name[month+1], year)
+        return '<tr><th colspan="7" class="%s"><center><i>%s</i> < %s > <i>%s</i></center></th></tr>' % (
+            self.cssclass_month_head, previous_month, current_month, next_month)
     
     def formatmonth(self, year, month):
         self.year, self.month = year, month
