@@ -5,7 +5,7 @@
 <h1 class="display-4">Места</h1>
 <ul>
 	{% for place in object_list %}
-	<li><a href="{% url 'core:one_place' place.id %}">{{ place.name }}</a></li>
+	<li><a href="{% url 'core:one_place' place.id %}">{{ place.name }} ({{place.count_events}}) </a></li>
 	{% endfor %}
 </ul>
 

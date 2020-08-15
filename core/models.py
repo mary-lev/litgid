@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.db.models import Count
 
 class Person(models.Model):
 	name = models.CharField(max_length=300)
@@ -40,8 +41,13 @@ class Place(models.Model):
 		events = Event.objects.filter(place=self).order_by('date')
 		return events
 
+	def count_events(self):
+		a = Event.objects.filter(place=self).count()
+		return a
+
 	def get_adresses(self):
-		events = Event.objects.filter(place=self).values_list('adress', flat=True).order_by('id')
+		events = Event.objects.filter(place=self).values_list('adress',\
+										 flat=True).order_by('id')
 		adresses = Adress.objects.filter(id__in=events)
 		return adresses
 
