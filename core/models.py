@@ -37,14 +37,6 @@ class Place(models.Model):
 	def __str__(self):
 		return self.name
 
-	def get_events(self):
-		events = Event.objects.filter(place=self).order_by('date')
-		return events
-
-	def count_events(self):
-		a = Event.objects.filter(place=self).count()
-		return a
-
 	def get_adresses(self):
 		events = Event.objects.filter(place=self).values_list('adress',\
 										 flat=True).order_by('id')
@@ -62,6 +54,7 @@ class Event(models.Model):
 	class Meta:
 		app_label = 'core'
 		verbose_name = 'Event'
+		ordering = ['date']
 
 	def __str__(self):
 		return self.description
