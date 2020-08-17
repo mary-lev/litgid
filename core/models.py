@@ -37,7 +37,7 @@ class Place(models.Model):
 	def __str__(self):
 		return self.name
 
-	def get_adresses(self):
+	def show_adresses(self):
 		events = Event.objects.filter(place=self).values_list('adress',\
 										 flat=True).order_by('id')
 		adresses = Adress.objects.filter(id__in=events)

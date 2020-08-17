@@ -14,7 +14,7 @@
       <li><b>{{ event.date }}</b> {{event.description|truncatewords:20}} </li>
       {% endfor %}</small>
     </ul>
-      <footer class="blockquote-footer">{{ object.name }} {% for adress in object.get_adresses %} <cite title="Source Title">/ {{ adress.name }} {% endfor %} </cite></footer>
+      <footer class="blockquote-footer">{{ object.name }} {% for adress in object.show_adresses %} <cite>/ {{ adress.name }} {% endfor %} </cite></footer>
     </blockquote>
   </div>
 </div>
