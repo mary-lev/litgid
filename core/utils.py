@@ -43,8 +43,8 @@ class EventCalendar(HTMLCalendar):
         """
         current_month = '%s %s' % (month_name[month-1], year)
         
-        return '<tr><th colspan="7" class="%s"><center>%s</center></th></tr>' % \
-        (self.cssclass_month_head,current_month)
+        return '<tr><th colspan="7" class="display-4"><center>%s</center></th></tr>' % \
+        (current_month)
     
     def formatmonth(self, year, month):
         self.year, self.month = year, month

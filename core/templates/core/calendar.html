@@ -4,4 +4,24 @@
 
 {{ calendar }}
 
+<center>
+
+ <a class="btn btn-primary" role="button" href="{% url 'core:calendar' year previous_month %}" >  
+ {{ previous_name }} </a>
+
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{year}} 
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+  	  	
+  	{% for one_year in all_years %}
+    <a class="dropdown-item" href="{% url 'core:calendar' one_year 1%}">{{one_year}}</a>
+    {% endfor %}
+
+  </div>
+  
+<a class="btn btn-primary" role="button" href="{% url 'core:calendar' year next_month %}" >  {{ next_name }} </a>
+
+</center>
+
 {% endblock %}
