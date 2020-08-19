@@ -42,7 +42,6 @@ class EventCalendar(HTMLCalendar):
         Return a month name as a table row.
         """
         current_month = '%s %s' % (month_name[month-1], year)
-        
         return '<tr><th colspan="7" class="display-4"><center>%s</center></th></tr>' % \
         (current_month)
     
@@ -59,3 +58,25 @@ class EventCalendar(HTMLCalendar):
     def day_cell(self, cssclass, body):
         return '<td class="%s" style="word-wrap: break-word;min-width: \
                 160px;max-width: 160px;"><small>%s</small></td>' % (cssclass, body)
+
+    def previous_month(self, year, month):
+        if self.month==1:
+            previous_month=12
+            previous_year= self.year-1
+        else:
+            previous_year=self.year
+            previous_month=self.month-1
+        result = {'year': previous_year, 'month': previous_month, \
+            'name': month_name[previous_month-1] }
+        return result
+
+    def next_month(self, year, month):
+        if self.month==12:
+            next_month = 1
+            next_year = self.year+1
+        else:
+            next_month = self.month+1
+            next_year = self.year
+        result = {'year': next_year, 'month': next_month, \
+                'name': month_name[next_month-1] }
+        return result

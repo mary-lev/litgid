@@ -6,8 +6,8 @@
 
 <center>
 
- <a class="btn btn-primary" role="button" href="{% url 'core:calendar' year previous_month %}" >  
- {{ previous_name }} </a>
+ <a class="btn btn-primary" role="button" href="{% url 'core:calendar' previous.year previous.month %}" >  
+ {{ previous.name }} </a>
 
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{year}} 
@@ -20,7 +20,7 @@
 
   </div>
   
-<a class="btn btn-primary" role="button" href="{% url 'core:calendar' year next_month %}" >  {{ next_name }} </a>
+<a class="btn btn-primary" role="button" href="{% url 'core:calendar' next.year next.month %}" >  {{ next.name }} </a>
 
 </center>
 
