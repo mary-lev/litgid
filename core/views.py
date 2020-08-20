@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from rest_framework import viewsets
 from django.utils.safestring import mark_safe
+from rest_framework import viewsets
+
+import markdown
+import os
+from litgid.settings import BASE_DIR
 
 from .serializers import EventSerializer, PlaceSerializer, AdressSerializer
 from .models import Event, Place, Adress
@@ -12,6 +16,14 @@ from .utils import EventCalendar, month_name
 def index(request):
 	cards = Event.objects.all()[:3]
 	return render(request, 'core/index.html', {'cards': cards})
+
+def research(request):
+	file_path = os.path.join(BASE_DIR, 'Readme.md')
+	with open(file_path, encoding='utf-8') as f:
+		text = f.read()
+	md = markdown.Markdown(extensions=["extra"])
+	text = md.convert(text)
+	return render(request, 'core/research.html', {'text': mark_safe(text)})
 
 def new_calendar(request, year, month):
 	selected_events = Event.objects.order_by('date').filter(date__year=year, date__month=month)

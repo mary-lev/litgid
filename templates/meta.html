@@ -4,7 +4,9 @@
   <div class="card-body">
     <h5 class="card-title">История культурной жизни</h5>
     <p class="card-text">Принципы систематизации и построения сетевой модели литературной жизни Санкт-Петербурга: взаимосвязи, картография, сетевой анализ</p>
-    <a href="#" class="btn btn-primary">Об исследовании</a>
+{% block research %}
+    <a href='{% url "core:research" %}' class="btn btn-primary">Об исследовании</a>
+  {% endblock %}
   </div>
 </div>
 </div>

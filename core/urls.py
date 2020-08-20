@@ -12,6 +12,7 @@ router.register(r'api_adresses', views.AdressViewSet)
 app_name = 'core'
 urlpatterns = [
 	path('', views.index, name='index'),
+	path('research', views.research, name='research'),
 	path('calendar/<int:year>/<int:month>', views.new_calendar, name='calendar'),
 	path('places', PlaceListView.as_view(), name='places'),
 	path('events', EventListView.as_view(), name='events'),
