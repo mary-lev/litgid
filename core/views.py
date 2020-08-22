@@ -63,7 +63,7 @@ class PlaceListView(ListView):
 # CLasses for API
 
 class EventViewSet(viewsets.ModelViewSet):
-	queryset = Event.objects.all().order_by('description')
+	queryset = Event.objects.all()
 	serializer_class = EventSerializer
 
 class PlaceViewSet(viewsets.ModelViewSet):
