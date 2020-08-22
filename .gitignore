@@ -49,4 +49,5 @@ Temporary Items
 #secret_key
 /litgid/secret_setting.py
 
-core/__pychache__/
+# Byte-compiled / optimized / DLL
+__pycache__/
