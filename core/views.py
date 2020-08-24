@@ -8,8 +8,8 @@ import markdown
 import os
 from litgid.settings import BASE_DIR
 
-from .serializers import EventSerializer, PlaceSerializer, AdressSerializer
-from .models import Event, Place, Adress
+from .serializers import EventSerializer, PlaceSerializer, AdressSerializer, PersonSerializer
+from .models import Event, Place, Adress, Person
 from .utils import EventCalendar, month_name
 
 
@@ -48,6 +48,10 @@ class PlaceDetailView(DetailView):
 	model = Place
 
 
+class PersonDetailView(DetailView):
+	model = Person
+
+
 class EventListView(ListView):
 	paginate_by = 25
 	model = Event
@@ -58,6 +62,12 @@ class PlaceListView(ListView):
 	paginate_by = 25
 	model = Place
 	queryset = Place.objects.order_by('name')
+
+
+class PersonListView(ListView):
+	paginate_by = 25
+	model = Person
+	queryset = Person.objects.order_by('name')
 
 
 # CLasses for API
@@ -73,3 +83,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
 class AdressViewSet(viewsets.ModelViewSet):
 	queryset = Adress.objects.all()
 	serializer_class = AdressSerializer
+
+class PersonViewSet(viewsets.ModelViewSet):
+	queryset = Person.objects.all()
+	serializer_class = PersonSerializer

@@ -1,0 +1,25 @@
+{% extends 'page.html' %}
+
+
+{% block content %}
+
+<div class="card">
+  <div class="card-header">
+    {{ object.name }}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0"><small>
+      <ul>
+      {% for event in object.event_set.all %}
+      <li><b>{{ event.date }}</b> {{event.description|truncatewords:300}} </li>
+      <p>{% for p in event.people %} {{p.name}} {% endfor %}</p>
+      {% endfor %}</small>
+    </ul>
+      <footer class="blockquote-footer">{{ object.name }} {% for adress in object.show_adresses %} <cite>/ {{ adress.name }} {% endfor %} </cite></footer>
+    </blockquote>
+  </div>
+</div>
+
+
+	
+{% endblock %}

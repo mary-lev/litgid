@@ -1,0 +1,31 @@
+{% extends 'page.html' %}
+
+
+{% block content %}
+<h1 class="display-4">Персонажи</h1>
+<ul>
+	{% for person in object_list %}
+	<li><a href="{% url 'core:one_person' person.id %}">{{ person.name }} ({{person.event_set.all.count}}) </a></li>
+	{% endfor %}
+</ul>
+
+
+
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+  	{% if page_obj.has_previous %}
+  	<li class="page-item"><a class="page-link" href="?page=1">&laquo; 1</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+    {% endif %}
+
+    <li class="page-item"><a class="page-link" href="#"> {{ page_obj.number }}</a></li>
+    {% if page_obj.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a></li>
+    {% endif %}
+  </ul> 
+</nav>
+
+{% endblock %}
