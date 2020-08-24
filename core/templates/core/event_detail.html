@@ -10,11 +10,11 @@
   <div class="card-body">
     <blockquote class="blockquote mb-0">
       <p>{{ object.description }}</p>
+      <p>{% for p in object.people.all %} <a href="{% url 'core:one_person' p.id %}" role="button" class="btn btn-outline-primary">{{p.name}}</a> {% endfor %}</p>
       <footer class="blockquote-footer">{{ object.place.name }} / <cite title="Source Title">{{ object.adress.name }}</cite></footer>
     </blockquote>
   </div>
 </div>
 
 
-	
 {% endblock %}

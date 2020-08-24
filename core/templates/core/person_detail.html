@@ -12,7 +12,7 @@
       <ul>
       {% for event in object.event_set.all %}
       <li><b>{{ event.date }}</b> {{event.description|truncatewords:300}} </li>
-      <p>{% for p in event.people %} {{p.name}} {% endfor %}</p>
+      <p>{% for p in event.people.all %} <a href="{% url 'core:one_person' p.id %}" class="badge badge-primary">{{p.name}} </a> {% endfor %}</p>
       {% endfor %}</small>
     </ul>
       <footer class="blockquote-footer">{{ object.name }} {% for adress in object.show_adresses %} <cite>/ {{ adress.name }} {% endfor %} </cite></footer>
