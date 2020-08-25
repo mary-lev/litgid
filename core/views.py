@@ -8,14 +8,17 @@ import markdown
 import os
 from litgid.settings import BASE_DIR
 
-from .serializers import EventSerializer, PlaceSerializer, AdressSerializer, PersonSerializer
+from .serializers import EventSerializer, PlaceSerializer, \
+						AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
-from .utils import EventCalendar, month_name
+
+from .utils import EventCalendar
 
 
 def index(request):
 	cards = Event.objects.all()[:3]
 	return render(request, 'core/index.html', {'cards': cards})
+
 
 def research(request):
 	file_path = os.path.join(BASE_DIR, 'Readme.md')
@@ -24,6 +27,7 @@ def research(request):
 	md = markdown.Markdown(extensions=["extra"])
 	text = md.convert(text)
 	return render(request, 'core/research.html', {'text': mark_safe(text)})
+
 
 def new_calendar(request, year, month):
 	selected_events = Event.objects.order_by('date').filter(date__year=year, date__month=month)
@@ -72,17 +76,21 @@ class PersonListView(ListView):
 
 # CLasses for API
 
+
 class EventViewSet(viewsets.ModelViewSet):
 	queryset = Event.objects.all()
 	serializer_class = EventSerializer
+
 
 class PlaceViewSet(viewsets.ModelViewSet):
 	queryset = Place.objects.all()
 	serializer_class = PlaceSerializer
 
+
 class AdressViewSet(viewsets.ModelViewSet):
 	queryset = Adress.objects.all()
 	serializer_class = AdressSerializer
+
 
 class PersonViewSet(viewsets.ModelViewSet):
 	queryset = Person.objects.all()
