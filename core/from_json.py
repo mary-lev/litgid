@@ -17,18 +17,21 @@ from models import Event, Place, Adress, Person
 
 
 def main():
-	with open('c:/Users/anew/litgid/litgid/data/events_names_str.json', \
+	with open('c:/Users/anew/litgid/litgid/data/events_names_str.json',
 				encoding='utf-8') as f:
 		data = json.loads(f.read())
 		for line in data['data'][:500]:
 			print(line)
-			place, created = Place.objects.get_or_create(name=line['place'])
-			adress, created = Adress.objects.get_or_create(name=line['adress'])
+			place, created = Place.objects.get_or_create(
+				name=line['place'])
+			adress, created = Adress.objects.get_or_create(
+				name=line['adress'])
 			event = Event.objects.create(
-			description = line['event'],
-			date = datetime.strptime(line['date'], '%Y-%m-%d %H:%M:%S'),
-			place = place,
-			adress = adress,
+				description = line['event'],
+				date = datetime.strptime(
+					line['date'], '%Y-%m-%d %H:%M:%S'),
+				place = place,
+				adress = adress,
 				)
 
 			event.save()

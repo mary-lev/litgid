@@ -29,11 +29,13 @@ class EventCalendar(HTMLCalendar):
                 body = ['<ul>']
                 for event in self.events[day]:
                     body.append('<li>')
-                    body.append('<a href="%s">' % event.get_absolute_url())
+                    body.append('<a href="%s">' % event
+                        .get_absolute_url())
                     body.append(esc(event.place.name))
                     body.append('</a></li>')
                 body.append('</ul>')
-                return self.day_cell(cssclass, '%d %s' % (day, ''.join(body)))
+                return self.day_cell(cssclass, '%d %s' % (day, ''
+                    .join(body)))
             return self.day_cell(cssclass, day)
         return self.day_cell('noday', '&nbsp;')
 
@@ -42,8 +44,7 @@ class EventCalendar(HTMLCalendar):
         Return a month name as a table row.
         """
         current_month = '%s %s' % (month_name[month-1], year)
-        return '<tr><th colspan="7" class="display-4"><center>%s</center></th></tr>' % \
-        (current_month)
+        return '<tr><th colspan="7" class="display-4"><center>%s</center></th></tr>' % (current_month)
 
     def formatmonth(self, year, month):
         self.year, self.month = year, month
@@ -66,8 +67,7 @@ class EventCalendar(HTMLCalendar):
         else:
             previous_year = self.year
             previous_month = self.month-1
-        result = {'year': previous_year, 'month': previous_month, \
-            'name': month_name[previous_month-1]}
+        result = {'year': previous_year, 'month': previous_month, 'name': month_name[previous_month-1]}
         return result
 
     def next_month(self, year, month):

@@ -17,7 +17,8 @@ class Person(models.Model):
 
 class Adress(models.Model):
 	name = models.CharField(max_length=300)
-	coordinates = models.CharField(max_length=300, blank=True, null=True)
+	coordinates = models.CharField(
+		max_length=300, blank=True, null=True)
 
 	class Meta:
 		app_label = 'core'
@@ -38,7 +39,8 @@ class Place(models.Model):
 		return self.name
 
 	def show_adresses(self):
-		events = Event.objects.filter(place=self).values_list('adress', flat=True).order_by('id')
+		events = Event.objects.filter(place=self).values_list(
+			'adress', flat=True).order_by('id')
 		adresses = Adress.objects.filter(id__in=events)
 		return adresses
 
@@ -46,8 +48,10 @@ class Place(models.Model):
 class Event(models.Model):
 	description = models.TextField()
 	date = models.DateTimeField(auto_now=False, auto_now_add=False)
-	place = models.ForeignKey(Place, on_delete=models.CASCADE, blank=True, null=True)
-	adress = models.ForeignKey(Adress, on_delete=models.CASCADE, blank=True, null=True)
+	place = models.ForeignKey(
+		Place, on_delete=models.CASCADE, blank=True, null=True)
+	adress = models.ForeignKey(
+		Adress, on_delete=models.CASCADE, blank=True, null=True)
 	people = models.ManyToManyField(Person, blank=True)
 
 	class Meta:

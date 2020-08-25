@@ -3,7 +3,8 @@ from .models import Event, Place, Adress, Person
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
-	url = serializers.HyperlinkedIdentityField(view_name='core:person-detail')
+	url = serializers.HyperlinkedIdentityField(
+		view_name='core:person-detail')
 
 	class Meta:
 		model = Person
@@ -11,7 +12,8 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PlaceSerializer(serializers.HyperlinkedModelSerializer):
-	url = serializers.HyperlinkedIdentityField(view_name='core:place-detail')
+	url = serializers.HyperlinkedIdentityField(
+		view_name='core:place-detail')
 
 	class Meta:
 		model = Place
@@ -19,7 +21,8 @@ class PlaceSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AdressSerializer(serializers.HyperlinkedModelSerializer):
-	url = serializers.HyperlinkedIdentityField(view_name='core:adress-detail')
+	url = serializers.HyperlinkedIdentityField(
+		view_name='core:adress-detail')
 
 	class Meta:
 		model = Adress
@@ -27,7 +30,8 @@ class AdressSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
-	url = serializers.HyperlinkedIdentityField(view_name='core:event-detail')
+	url = serializers.HyperlinkedIdentityField(
+		view_name='core:event-detail')
 	place = PlaceSerializer()
 	adress = AdressSerializer()
 	people = PersonSerializer(many=True, read_only=False)
