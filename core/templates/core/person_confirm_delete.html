@@ -8,7 +8,16 @@
 
 <form action="" method="POST">
   {% csrf_token %}
+
+  {% for field in form %}
+  <div class='form-group'>
+  	{{ field.label }}
+  	{{ field }}
+  </div>
+  {% endfor %}
+
   <input type="submit" class="btn btn-danger" value="Yes, delete.">
+  
 </form>
 
 {% endblock %}
