@@ -1,9 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
 from . import views
-from .views import EventListView, PlaceListView,
-					EventDetailView, PlaceDetailView,
-					PersonListView, PersonDetailView
+from .views import EventListView, PlaceListView,\
+					EventDetailView, PlaceDetailView,\
+					PersonListView, PersonDetailView, PersonUpdate, PersonDelete
 
 
 router = routers.DefaultRouter()
@@ -25,6 +25,8 @@ urlpatterns = [
 	path('place/<pk>/', PlaceDetailView.as_view(), name='one_place'),
 	path('person/<pk>/', PersonDetailView
 		.as_view(), name='one_person'),
+	path('person_edit/<pk>/', PersonUpdate.as_view(), name='person_edit'),
+	path('person_delete/<pk>', PersonDelete.as_view(), name='person_delete'),
 	path('api/', include(router.urls)),
 	path('api-auth/', include(
 		'rest_framework.urls', namespace='rest_framework')),

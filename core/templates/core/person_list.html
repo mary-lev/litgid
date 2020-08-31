@@ -5,7 +5,7 @@
 <h1 class="display-4">Персонажи</h1>
 <ul>
 	{% for person in object_list %}
-	<li><a href="{% url 'core:one_person' person.id %}">{{ person.name }} ({{person.event_set.all.count}}) </a></li>
+	<li><a href="{% url 'core:one_person' person.id %}">{{ person.name }} {{person.second_name}} {{ person.family }} ({{person.event_set.all.count}}) </a></li>
 	{% endfor %}
 </ul>
 

@@ -1,11 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.forms import ModelForm
 
 
 class Person(models.Model):
-	name = models.CharField(max_length=300)
-	second_name = models.CharField(max_length=300)
-	family = models.CharField(max_length=300)
+	name = models.CharField(max_length=300, blank=True)
+	second_name = models.CharField(max_length=300, blank=True)
+	family = models.CharField(max_length=300, blank=True)
 
 	class Meta:
 		verbose_name = "Person"
@@ -13,6 +14,15 @@ class Person(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def get_absolute_url(self):
+		return reverse('core:one_person', args=[self.id])
+
+	def show_full_name(self):
+		return '{0} {1} {2}'.format(
+			self.name, 
+			self.second_name, 
+			self.family)
 
 
 class Adress(models.Model):

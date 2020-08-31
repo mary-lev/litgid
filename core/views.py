@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.utils.safestring import mark_safe
+
 from rest_framework import viewsets
 
 import markdown
 import os
 from litgid.settings import BASE_DIR
 
-from .serializers import EventSerializer, PlaceSerializer,
+from .serializers import EventSerializer, PlaceSerializer,\
 						AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
 
@@ -79,6 +81,16 @@ class PersonListView(ListView):
 	paginate_by = 25
 	model = Person
 	queryset = Person.objects.order_by('name')
+
+
+class PersonUpdate(UpdateView):
+	model = Person
+	fields = '__all__'
+
+
+class PersonDelete(DeleteView):
+	model = Person
+	success_url = "/"
 
 
 # CLasses for API

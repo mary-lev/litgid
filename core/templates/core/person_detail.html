@@ -5,14 +5,16 @@
 
 <div class="card">
   <div class="card-header">
-    {{ object.name }}
+    {{ object.name }} {{object.second_name}} {{ object.family }} 
+    <a href="{% url 'core:person_edit' person.id %}" class="btn btn-primary btn-sm" tabindex="-1" role="button">Edit</a>
+     <a href="{% url 'core:person_delete' person.id %}" class="btn btn-danger btn-sm" tabindex="-1" role="button">Delete</a>
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0"><small>
       <ul>
       {% for event in object.event_set.all %}
       <li><b>{{ event.date }}</b> {{event.description|truncatewords:300}} </li>
-      <p>{% for p in event.people.all %} <a href="{% url 'core:one_person' p.id %}" class="badge badge-primary">{{p.name}} </a> {% endfor %}</p>
+      <p>{% for p in event.people.all %} <a href="{% url 'core:one_person' p.id %}" class="badge badge-primary">{{p.show_full_name}} </a> {% endfor %}</p>
       {% endfor %}</small>
     </ul>
       <footer class="blockquote-footer">{{ object.name }} {% for adress in object.show_adresses %} <cite>/ {{ adress.name }} {% endfor %} </cite></footer>
