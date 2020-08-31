@@ -92,6 +92,10 @@ class PersonDelete(DeleteView):
 	model = Person
 	success_url = "/"
 
+class EventUpdate(UpdateView):
+	model = Event
+	fields = "__all__"
+
 
 # CLasses for API
 
