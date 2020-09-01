@@ -97,31 +97,21 @@ class EventUpdate(UpdateView):
 	model = Event
 	fields = "__all__"
 
-new = [([Decimal('59.934033'), Decimal('30.348468')], 'Литейный пр., д. 58'),
- ([Decimal('59.929136'), Decimal('30.359338')], 'Лиговский пр., д. 53'),
- ([Decimal('59.935944'), Decimal('30.324097')], 'Невский пр., д. 24'),
- ([Decimal('59.934199'), Decimal('30.328975')], 'Думская ул., д. 1-3'),
- ([Decimal('59.965205'), Decimal('30.311538')],
-  'Большой проспект П. С., д. 73'),
- ([Decimal('59.931896'), Decimal('30.251621')], '29-я линия В. О., д. 2'),
- ([Decimal('59.92295'), Decimal('30.360919')], 'Лиговский пр., д. 50, к. 16'),
- ([Decimal('59.941092'), Decimal('30.281409')], '6-я линия В. О., д. 17'),
- ([Decimal('59.936332'), Decimal('30.347704')], 'Литейный пр., д. 53'),
- ([Decimal('59.940132'), Decimal('30.41806')], 'Якорная ул., д. 5А')]
 
 class FoliumView(TemplateView):
 	template_name = 'core/map.html'
 
 	def get_context_data(self, **kwargs):
-		global new
+		queryset = Adress.objects.all().distinct()
 		m = folium.Map(location=[59.946288, 30.349214],
 			zoom_start=13,
 			tiles='Stamen Toner')
 
-		for all in new:
+		for all in queryset:
+			(lat, lon) = (all.coordinates.replace('[', '').replace(']', '').split(', '))
 			folium.Marker(
-				location=all[0],
-				popup=all[1],
+				location= (lon, lat),
+				popup=all.name,
 				icon=folium.Icon(color='green')
 				).add_to(m)
 		m = m.get_root().render()
