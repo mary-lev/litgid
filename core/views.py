@@ -108,10 +108,13 @@ class FoliumView(TemplateView):
 			tiles='Stamen Toner')
 
 		for all in queryset:
-			(lat, lon) = (all.coordinates.replace('[', '').replace(']', '').split(', '))
+			(lat, lon) = (all.coordinates.replace('[', '').
+				replace(']', '')
+				.split(', '))
+			place = Place.objects.filter(event__adress=all.id).distinct()[0]
 			folium.Marker(
 				location= (lon, lat),
-				popup=all.name,
+				popup=place.name,
 				icon=folium.Icon(color='green')
 				).add_to(m)
 		m = m.get_root().render()
