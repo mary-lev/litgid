@@ -9,6 +9,7 @@ from rest_framework import viewsets
 import markdown
 import os
 import folium
+from decimal import Decimal
 from litgid.settings import BASE_DIR
 
 from .serializers import EventSerializer, PlaceSerializer,\
@@ -97,17 +98,17 @@ class EventUpdate(UpdateView):
 	model = Event
 	fields = "__all__"
 
-new = [([59.934033, 30.348468], 'Литейный пр., д. 58'),
- ([59.929136, 30.359338], 'Лиговский пр., д. 53'),
- ([59.935944, 30.324097], 'Невский пр., д. 24'),
- ([59.934199, 30.328975], 'Думская ул., д. 1-3'),
- ([59.965205, 30.311538],
+new = [([Decimal('59.934033'), Decimal('30.348468')], 'Литейный пр., д. 58'),
+ ([Decimal('59.929136'), Decimal('30.359338')], 'Лиговский пр., д. 53'),
+ ([Decimal('59.935944'), Decimal('30.324097')], 'Невский пр., д. 24'),
+ ([Decimal('59.934199'), Decimal('30.328975')], 'Думская ул., д. 1-3'),
+ ([Decimal('59.965205'), Decimal('30.311538')],
   'Большой проспект П. С., д. 73'),
- ([59.931896, 30.251621], '29-я линия В. О., д. 2'),
- ([59.92295, 30.360919], 'Лиговский пр., д. 50, к. 16'),
- ([59.941092, 30.281409], '6-я линия В. О., д. 17'),
- ([59.936332, 30.347704], 'Литейный пр., д. 53'),
- ([59.940132, 30.41806], 'Якорная ул., д. 5А')]
+ ([Decimal('59.931896'), Decimal('30.251621')], '29-я линия В. О., д. 2'),
+ ([Decimal('59.92295'), Decimal('30.360919')], 'Лиговский пр., д. 50, к. 16'),
+ ([Decimal('59.941092'), Decimal('30.281409')], '6-я линия В. О., д. 17'),
+ ([Decimal('59.936332'), Decimal('30.347704')], 'Литейный пр., д. 53'),
+ ([Decimal('59.940132'), Decimal('30.41806')], 'Якорная ул., д. 5А')]
 
 class FoliumView(TemplateView):
 	template_name = 'core/map.html'
@@ -115,12 +116,12 @@ class FoliumView(TemplateView):
 	def get_context_data(self, **kwargs):
 		global new
 		m = folium.Map(location=[59.946288, 30.349214],
-			zoom_start=12,
+			zoom_start=13,
 			tiles='Stamen Toner')
 
 		for all in new:
 			folium.Marker(
-				location=[all[0][0], all[0][1]],
+				location=all[0],
 				popup=all[1],
 				icon=folium.Icon(color='green')
 				).add_to(m)
