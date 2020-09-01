@@ -5,7 +5,7 @@ from .views import EventListView, PlaceListView,\
 					EventDetailView, PlaceDetailView,\
 					PersonListView, PersonDetailView, \
 					PersonUpdate, PersonDelete,\
-					EventUpdate
+					EventUpdate, FoliumView
 
 
 router = routers.DefaultRouter()
@@ -30,6 +30,7 @@ urlpatterns = [
 	path('person_edit/<pk>/', PersonUpdate.as_view(), name='person_edit'),
 	path('person_delete/<pk>', PersonDelete.as_view(), name='person_delete'),
 	path('event_edit/<pk>/', EventUpdate.as_view(), name="event_edit"),
+	path('map', FoliumView.as_view(), name='map'),
 	path('api/', include(router.urls)),
 	path('api-auth/', include(
 		'rest_framework.urls', namespace='rest_framework')),

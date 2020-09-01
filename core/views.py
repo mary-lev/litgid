@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.utils.safestring import mark_safe
@@ -8,6 +8,7 @@ from rest_framework import viewsets
 
 import markdown
 import os
+import folium
 from litgid.settings import BASE_DIR
 
 from .serializers import EventSerializer, PlaceSerializer,\
@@ -96,6 +97,24 @@ class EventUpdate(UpdateView):
 	model = Event
 	fields = "__all__"
 
+
+class FoliumView(TemplateView):
+	template_name = 'core/map.html'
+
+	def get_context_data(self, **kwargs):
+		figure = folium.Figure()
+		m = folium.Map(location=[30.349214, 59.946288],
+			zoom_start=12,
+			tiles='Stamen Terrain')
+		m.add_to(figure)
+
+		folium.Marker(
+			location=[30.349214, 59.946288],
+			popup='Литейный пр., 8',
+			icon=folium.Icon(color='green')
+			).add_to(m)
+		figure.render()
+		return {'map': figure}
 
 # CLasses for API
 
