@@ -40,15 +40,14 @@ def new_calendar(request, year, month):
 	calendar = EventCalendar(selected_events)
 	c = calendar.formatmonth(year, month)
 	all_years = range(1998, 2021)
-
 	next_month = calendar.next_month(year, month)
 	previous_month = calendar.previous_month(year, month)
 	return render(request, 'core/calendar.html', 
 		{'calendar': mark_safe(c), 
-		'month': month, 
-		'year': year, 
+		'month': month,
+		'year': year,
 		'all_years': all_years,
-		'previous': previous_month, 
+		'previous': previous_month,
 		'next': next_month}
 		)
 

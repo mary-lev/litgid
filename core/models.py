@@ -11,6 +11,7 @@ class Person(models.Model):
 	class Meta:
 		verbose_name = "Person"
 		app_label = 'core'
+		unique_together = (('name', 'second_name', 'family'),)
 
 	def __str__(self):
 		return self.name
