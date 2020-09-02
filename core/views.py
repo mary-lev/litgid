@@ -112,9 +112,11 @@ class FoliumView(TemplateView):
 				replace(']', '')
 				.split(', '))
 			place = Place.objects.filter(event__adress=all.id).distinct()[0]
+			link = "/place/{}".format(place.id)
+			text = folium.Html("<a href='{}'>{}</a>".format(link, place.name), script=True)
 			folium.Marker(
 				location= (lon, lat),
-				popup=place.name,
+				popup=folium.Popup(text),
 				icon=folium.Icon(color='green')
 				).add_to(m)
 		m = m.get_root().render()
