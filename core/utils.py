@@ -1,8 +1,10 @@
 from calendar import HTMLCalendar, day_abbr
 from itertools import groupby
-
 from django.utils.html import conditional_escape as esc
+import folium
+from decimal import Decimal
 
+from .models import Place, Adress
 
 month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
@@ -80,3 +82,30 @@ class EventCalendar(HTMLCalendar):
         result = {'year': next_year, 'month': next_month, \
                 'name': month_name[next_month-1]}
         return result
+
+
+class FoliumMap():
+
+    def __init__(self, queryset):
+        self.queryset = queryset
+
+    def create_folium_map(self, **kwargs):
+        spb_coordinates = [59.946288, 30.349214]
+        m = folium.Map(location=spb_coordinates,
+            zoom_start=13,
+            tiles='Stamen Toner')
+
+        for all in self.queryset:
+            (lat, lon) = (all.coordinates.replace('[', '').
+                replace(']', '')
+                .split(', '))
+            place = Place.objects.filter(event__adress=all.id).distinct()[0]
+            link = "/place/{}".format(place.id)
+            text = folium.Html("<a href='{}'>{}</a>".format(link, place.name), script=True)
+            folium.Marker(
+                location= (lon, lat),
+                popup=folium.Popup(text),
+                icon=folium.Icon(color='green')
+                ).add_to(m)
+        m = m.get_root().render()
+        return m

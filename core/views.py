@@ -16,7 +16,7 @@ from .serializers import EventSerializer, PlaceSerializer,\
 						AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
 
-from .utils import EventCalendar
+from .utils import EventCalendar, FoliumMap
 
 
 def index(request):
@@ -103,23 +103,7 @@ class FoliumView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		queryset = Adress.objects.all().distinct()
-		m = folium.Map(location=[59.946288, 30.349214],
-			zoom_start=13,
-			tiles='Stamen Toner')
-
-		for all in queryset:
-			(lat, lon) = (all.coordinates.replace('[', '').
-				replace(']', '')
-				.split(', '))
-			place = Place.objects.filter(event__adress=all.id).distinct()[0]
-			link = "/place/{}".format(place.id)
-			text = folium.Html("<a href='{}'>{}</a>".format(link, place.name), script=True)
-			folium.Marker(
-				location= (lon, lat),
-				popup=folium.Popup(text),
-				icon=folium.Icon(color='green')
-				).add_to(m)
-		m = m.get_root().render()
+		m = FoliumMap(queryset).create_folium_map()
 		return {'map': m}
 
 # CLasses for API
