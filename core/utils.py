@@ -2,6 +2,7 @@ from calendar import HTMLCalendar, day_abbr
 from itertools import groupby
 from django.utils.html import conditional_escape as esc
 import folium
+from folium.plugins import MarkerCluster
 from decimal import Decimal
 
 from .models import Place, Adress
@@ -95,6 +96,8 @@ class FoliumMap():
             zoom_start=13,
             tiles='Stamen Toner')
 
+        marker_cluster = MarkerCluster().add_to(m)
+
         for all in self.queryset:
             (lat, lon) = (all.coordinates.replace('[', '').
                 replace(']', '')
@@ -106,6 +109,6 @@ class FoliumMap():
                 location= (lon, lat),
                 popup=folium.Popup(text),
                 icon=folium.Icon(color='green')
-                ).add_to(m)
+                ).add_to(marker_cluster)
         m = m.get_root().render()
         return m
