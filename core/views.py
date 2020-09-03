@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 
 from rest_framework import viewsets
@@ -87,7 +88,7 @@ class PersonUpdate(UpdateView):
 
 class PersonDelete(DeleteView):
 	model = Person
-	success_url = "/"
+	success_url = reverse_lazy("core:persons")
 
 
 class EventUpdate(UpdateView):
