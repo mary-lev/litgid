@@ -8,10 +8,7 @@ from rest_framework import viewsets
 
 import markdown
 import os
-import folium
-from decimal import Decimal
 from litgid.settings import BASE_DIR
-
 from .serializers import EventSerializer, PlaceSerializer,\
 						AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
@@ -42,8 +39,8 @@ def new_calendar(request, year, month):
 	all_years = range(1998, 2021)
 	next_month = calendar.next_month(year, month)
 	previous_month = calendar.previous_month(year, month)
-	return render(request, 'core/calendar.html', 
-		{'calendar': mark_safe(c), 
+	return render(request, 'core/calendar.html',
+		{'calendar': mark_safe(c),
 		'month': month,
 		'year': year,
 		'all_years': all_years,
@@ -53,7 +50,6 @@ def new_calendar(request, year, month):
 
 
 # Class-based views
-
 class EventDetailView(DetailView):
 	model = Event
 
@@ -93,6 +89,7 @@ class PersonDelete(DeleteView):
 	model = Person
 	success_url = "/"
 
+
 class EventUpdate(UpdateView):
 	model = Event
 	fields = "__all__"
@@ -106,9 +103,8 @@ class FoliumView(TemplateView):
 		m = FoliumMap(queryset).create_folium_map()
 		return {'map': m}
 
+
 # CLasses for API
-
-
 class EventViewSet(viewsets.ModelViewSet):
 	queryset = Event.objects.all()
 	serializer_class = EventSerializer

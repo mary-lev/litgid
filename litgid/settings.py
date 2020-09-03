@@ -1,5 +1,5 @@
 from pathlib import Path
-from .secret_setting import *
+from .secret_setting import SECRET_KEY
 import os
 
 
@@ -47,7 +47,7 @@ ROOT_URLCONF = 'litgid.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,7 +64,8 @@ WSGI_APPLICATION = 'litgid.wsgi.application'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
 
@@ -79,7 +80,7 @@ DATABASES = {
     "NAME": 'd2dduh8uv55mmo',
     "USER": 'eihcelafrqojnn',
     "PASSWORD": 
-'c3221b4a66ae8696d7c9cc3e3db08037c60d584ad0d5fa84ae206522288f2b7a',
+        'c3221b4a66ae8696d7c9cc3e3db08037c60d584ad0d5fa84ae206522288f2b7a',
     "HOST": "ec2-54-228-209-117.eu-west-1.compute.amazonaws.com", 
     "PORT": "5432",
  }

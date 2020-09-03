@@ -5,7 +5,7 @@ import folium
 from folium.plugins import MarkerCluster
 from decimal import Decimal
 
-from .models import Place, Adress
+from .models import Place
 
 month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
@@ -80,7 +80,7 @@ class EventCalendar(HTMLCalendar):
         else:
             next_month = self.month+1
             next_year = self.year
-        result = {'year': next_year, 'month': next_month, \
+        result = {'year': next_year, 'month': next_month,
                 'name': month_name[next_month-1]}
         return result
 
@@ -106,7 +106,7 @@ class FoliumMap():
             link = "/place/{}".format(place.id)
             text = folium.Html("<a href='{}'>{}</a>".format(link, place.name), script=True)
             folium.Marker(
-                location= (lon, lat),
+                location=(lon, lat),
                 popup=folium.Popup(text),
                 icon=folium.Icon(color='green')
                 ).add_to(marker_cluster)
