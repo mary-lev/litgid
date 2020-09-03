@@ -2,12 +2,12 @@
 
 {% block content %}
 
-{{ calendar }}
+{{ calendar.formatmonth|safe }}
 
 <center>
 
- <a class="btn btn-primary" role="button" href="{% url 'core:calendar' previous.year previous.month %}" >  
- {{ previous.name }} </a>
+ <a class="btn btn-primary" role="button" href="{% url 'core:calendar' calendar.previous_month.year calendar.previous_month.month %}" >  
+ {{ calendar.previous_month.name }} </a>
 
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {{year}} 
@@ -15,12 +15,12 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
   	  	
   	{% for one_year in all_years %}
-    <a class="dropdown-item" href="{% url 'core:calendar' one_year 1%}">{{one_year}}</a>
+    <a class="dropdown-item" href="{% url 'core:calendar' one_year 1 %}">{{one_year}}</a>
     {% endfor %}
 
   </div>
   
-<a class="btn btn-primary" role="button" href="{% url 'core:calendar' next.year next.month %}" >  {{ next.name }} </a>
+<a class="btn btn-primary" role="button" href="{% url 'core:calendar' calendar.next_month.year calendar.next_month.month %}" >  {{ calendar.next_month.name }} </a>
 
 </center>
 

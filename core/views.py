@@ -14,7 +14,8 @@ from .serializers import EventSerializer, PlaceSerializer,\
 						AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
 
-from .utils import EventCalendar, FoliumMap
+from .utils import FoliumMap
+from .events_calendar import EventCalendar
 
 
 def index(request):
@@ -35,19 +36,13 @@ def research(request):
 def new_calendar(request, year, month):
 	selected_events = Event.objects.order_by('date').filter(
 		date__year=year, date__month=month)
-	calendar = EventCalendar(selected_events)
-	c = calendar.formatmonth(year, month)
+	calendar = EventCalendar(selected_events, year, month)
 	all_years = range(1998, 2021)
-	next_month = calendar.next_month(year, month)
-	previous_month = calendar.previous_month(year, month)
 	return render(request, 'core/calendar.html',
-		{'calendar': mark_safe(c),
+		{'calendar': calendar,
 		'month': month,
 		'year': year,
-		'all_years': all_years,
-		'previous': previous_month,
-		'next': next_month}
-		)
+		'all_years': all_years})
 
 
 # Class-based views
