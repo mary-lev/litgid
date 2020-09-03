@@ -3,12 +3,12 @@ from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
-from django.utils.safestring import mark_safe
-
 from rest_framework import viewsets
 
-import markdown
+import random
 import os
+import markdown
+
 from litgid.settings import BASE_DIR
 from .serializers import EventSerializer, PlaceSerializer,\
 						AdressSerializer, PersonSerializer
@@ -19,7 +19,7 @@ from .events_calendar import EventCalendar
 
 
 def index(request):
-	cards = Event.objects.all()[:3]
+	cards = random.sample(list(Event.objects.all()), 3)
 	return render(request, 'core/index.html', {'cards': cards})
 
 
@@ -29,8 +29,7 @@ def research(request):
 		text = f.read()
 	md = markdown.Markdown(extensions=["extra"])
 	text = md.convert(text)
-	return render(request, 'core/research.html', {
-		'text': mark_safe(text)})
+	return render(request, 'core/research.html', {'text': text})
 
 
 def new_calendar(request, year, month):
@@ -39,10 +38,7 @@ def new_calendar(request, year, month):
 	calendar = EventCalendar(selected_events, year, month)
 	all_years = range(1998, 2021)
 	return render(request, 'core/calendar.html',
-		{'calendar': calendar,
-		'month': month,
-		'year': year,
-		'all_years': all_years})
+		{'calendar': calendar, 'month': month, 'year': year, 'all_years': all_years})
 
 
 # Class-based views
