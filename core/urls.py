@@ -5,8 +5,7 @@ from .views import EventListView, PlaceListView,\
 					EventDetailView, PlaceDetailView,\
 					PersonListView, PersonDetailView, \
 					FoliumView
-from .forms import PersonUpdate, PersonDelete
-from .forms import EventUpdate
+from .views import PersonUpdate, PersonDelete, EventUpdate
 
 
 router = routers.DefaultRouter()

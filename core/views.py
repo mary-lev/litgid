@@ -4,16 +4,15 @@ import markdown
 
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
+from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-from django.urls import reverse_lazy
 from rest_framework import viewsets
 
 from litgid.settings import BASE_DIR
-from .serializers import EventSerializer, PlaceSerializer,\
-						AdressSerializer, PersonSerializer
+from .serializers import EventSerializer, PlaceSerializer
+from .serializers import AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
-
 from .utils import FoliumMap
 from .events_calendar import EventCalendar
 
@@ -72,10 +71,9 @@ class PersonListView(ListView):
 	model = Person
 	queryset = Person.objects.order_by('name')
 
-
 class PersonUpdate(UpdateView):
 	model = Person
-	fields = '__all__'
+	fields = ['name', 'second_name', 'family']
 
 
 class PersonDelete(DeleteView):
@@ -85,7 +83,8 @@ class PersonDelete(DeleteView):
 
 class EventUpdate(UpdateView):
 	model = Event
-	fields = "__all__"
+	fields = ['description', 'people']
+	success_url = reverse_lazy('core:events')
 
 
 class FoliumView(TemplateView):

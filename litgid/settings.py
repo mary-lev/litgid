@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
