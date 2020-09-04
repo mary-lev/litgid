@@ -4,8 +4,9 @@ from . import views
 from .views import EventListView, PlaceListView,\
 					EventDetailView, PlaceDetailView,\
 					PersonListView, PersonDetailView, \
-					PersonUpdate, PersonDelete,\
-					EventUpdate, FoliumView
+					FoliumView
+from .forms import PersonUpdate, PersonDelete
+from .forms import EventUpdate
 
 
 router = routers.DefaultRouter()
