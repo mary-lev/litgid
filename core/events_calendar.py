@@ -2,15 +2,15 @@ from calendar import HTMLCalendar, day_abbr
 from itertools import groupby
 from django.utils.html import conditional_escape as esc
 
-from .models import Place
 
-month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+             'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
 
 class EventCalendar(HTMLCalendar):
 
     def __init__(self, events, year, month):
-        super(EventCalendar, self).__init__()
+        super().__init__()
         self.events = self.group_by_day(events)
         self.cssclass_month = "table"
         self.cssclass = "table-primary"
@@ -49,7 +49,7 @@ class EventCalendar(HTMLCalendar):
         return '<tr><th colspan="7" class="display-4"><center>%s</center></th></tr>' % (current_month)
 
     def formatmonth(self):
-        return super(EventCalendar, self).formatmonth(self.year, self.month)
+        return super().formatmonth(self.year, self.month)
 
     def group_by_day(self, events):
         field = lambda event: event.date.day
@@ -68,7 +68,11 @@ class EventCalendar(HTMLCalendar):
         else:
             previous_year = self.year
             previous_month = self.month-1
-        result = {'year': previous_year, 'month': previous_month, 'name': month_name[previous_month-1]}
+        result = {
+            'year': previous_year,
+            'month': previous_month,
+            'name': month_name[previous_month-1]
+            }
         return result
 
     def next_month(self):

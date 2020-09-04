@@ -1,6 +1,6 @@
 {% extends 'page.html' %}
 
-
+{% block title %}{{ block.super }} {{ context_object_name }}{% endblock %}
 {% block content %}
 <h1 class="display-4">События</h1>
 <ul>

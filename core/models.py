@@ -12,6 +12,7 @@ class Person(models.Model):
 		verbose_name = "Person"
 		app_label = 'core'
 		unique_together = (('name', 'second_name', 'family'),)
+		ordering = ['family']
 
 	def __str__(self):
 		return self.name
@@ -21,8 +22,8 @@ class Person(models.Model):
 
 	def show_full_name(self):
 		return '{0} {1} {2}'.format(
-			self.name, 
-			self.second_name, 
+			self.name,
+			self.second_name,
 			self.family)
 
 

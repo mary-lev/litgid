@@ -1,13 +1,13 @@
+import random
+import os
+import markdown
+
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 from rest_framework import viewsets
-
-import random
-import os
-import markdown
 
 from litgid.settings import BASE_DIR
 from .serializers import EventSerializer, PlaceSerializer,\
@@ -25,10 +25,10 @@ def index(request):
 
 def research(request):
 	file_path = os.path.join(BASE_DIR, 'Readme.md')
-	with open(file_path, encoding='utf-8') as f:
-		text = f.read()
-	md = markdown.Markdown(extensions=["extra"])
-	text = md.convert(text)
+	with open(file_path, encoding='utf-8') as file:
+		text = file.read()
+	markdown_text = markdown.Markdown(extensions=["extra"])
+	text = markdown_text.convert(text)
 	return render(request, 'core/research.html', {'text': text})
 
 
@@ -57,6 +57,7 @@ class PersonDetailView(DetailView):
 class EventListView(ListView):
 	paginate_by = 25
 	model = Event
+	context_object_name = 'Список событий'
 	queryset = Event.objects.order_by('date')
 
 
@@ -92,8 +93,8 @@ class FoliumView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		queryset = Adress.objects.all().distinct()
-		m = FoliumMap(queryset).create_folium_map()
-		return {'map': m}
+		events_map = FoliumMap(queryset).create_folium_map()
+		return {'map': events_map}
 
 
 # CLasses for API

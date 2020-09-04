@@ -1,13 +1,13 @@
 import json
+from datetime import datetime
 import django
 from django.conf import settings
-from datetime import datetime
+
 from django.core.exceptions import MultipleObjectsReturned
 
 
 settings.configure(DATABASES = {
     'default': {
-    "ENGINE": "django.db.backends.postgresql_psycopg2",
     'ENGINE': 'django.db.backends.postgresql',
     "NAME": 'd2dduh8uv55mmo',
     "USER": 'eihcelafrqojnn',
