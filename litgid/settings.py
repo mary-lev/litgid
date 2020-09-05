@@ -75,17 +75,17 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-'default': {
+'second': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'second': {
+    'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    "NAME": 'd2dduh8uv55mmo',
-    "USER": 'eihcelafrqojnn',
+    "NAME": 'db0ic13kt362fa',
+    "USER": 'beytgschuzelxe',
     "PASSWORD":
-        'c3221b4a66ae8696d7c9cc3e3db08037c60d584ad0d5fa84ae206522288f2b7a',
-    "HOST": "ec2-54-228-209-117.eu-west-1.compute.amazonaws.com",
+        'd5d152b6eddab38aabdfefe4e22ca5abc3d69656240c3a101240e240c85e1c47',
+    "HOST": "ec2-34-253-148-186.eu-west-1.compute.amazonaws.com",
     "PORT": "5432",
 }
 }

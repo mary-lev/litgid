@@ -7,12 +7,12 @@
   <div class="card-header">
     {{ object.date }}
     <a href="{% url 'core:event_edit' object.id %}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">Edit event</a> 
-    <a href="{% url 'core:edit_persons' object.id %}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">Edit persons</a>
+    <a href="{% url 'core:edit_persons' object.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button">Edit persons</a>
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
       <p>{{ object.description }}</p>
-      <p>{% for p in object.people.all %} <a href="{% url 'core:one_person' p.id %}" role="button" class="btn btn-outline-primary">{{p.show_full_name}}</a> {% endfor %}</p>
+      <p>{% for p in object.people.all %} <a href="{% url 'core:one_person' p.id %}" role="button" class="btn btn-outline-secondary">{{p.show_full_name}}</a> {% endfor %}</p>
       <footer class="blockquote-footer">{{ object.place.name }} / <cite title="Source Title">{{ object.adress.name }}</cite></footer>
     </blockquote>
   </div>
