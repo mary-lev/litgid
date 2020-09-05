@@ -92,7 +92,7 @@ class PersonUpdate(UpdateView):
 	fields = ['name', 'second_name', 'family']
 
 	def get_succes_url(self):
-		return reverse_lazy('core:one_person', pk = self.id)
+		return reverse_lazy('core:one_person', pk=self.id)
 
 
 class PersonDelete(DeleteView):
@@ -103,7 +103,9 @@ class PersonDelete(DeleteView):
 class EventUpdate(UpdateView):
 	model = Event
 	fields = ['description', 'people']
-	success_url = reverse_lazy('core:events')
+
+	def get_success_url(self):
+		return reverse_lazy('core:one_event', pk=self.id)
 	
 
 
