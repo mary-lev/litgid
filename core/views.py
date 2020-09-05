@@ -90,7 +90,9 @@ class PersonListView(ListView):
 class PersonUpdate(UpdateView):
 	model = Person
 	fields = ['name', 'second_name', 'family']
-	success_url = reverse_lazy('core:persons')
+
+	def get_succes_url(self):
+		return reverse_lazy('core:one_person', pk = self.id)
 
 
 class PersonDelete(DeleteView):
