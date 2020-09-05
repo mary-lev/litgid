@@ -12,12 +12,14 @@
 	<div id="form_set">
 
 		<form method='POST'>
+			
 		{% csrf_token %}
     		{{ myformset.management_form }}
             	{% for form in myformset %}
             		<p>{{ form }}</p>
             	{% endfor %}
         <input type="submit" value="Submit" class="btn btn-primary">
+
     	</form>
 	</div>
 </div>
