@@ -64,7 +64,7 @@ class Event(models.Model):
 		Place, on_delete=models.CASCADE, blank=True, null=True)
 	adress = models.ForeignKey(
 		Adress, on_delete=models.CASCADE, blank=True, null=True)
-	people = models.ManyToManyField(Person, blank=True)
+	people = models.ManyToManyField(Person, related_name='event', blank=True)
 
 	class Meta:
 		app_label = 'core'

@@ -75,7 +75,11 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'second': {
     'ENGINE': 'django.db.backends.postgresql',
     "NAME": 'd2dduh8uv55mmo',
     "USER": 'eihcelafrqojnn',

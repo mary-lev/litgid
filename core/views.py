@@ -5,6 +5,7 @@ import markdown
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from django.urls import reverse_lazy
+from django.forms import modelformset_factory
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from rest_framework import viewsets
@@ -14,6 +15,7 @@ from .serializers import EventSerializer, PlaceSerializer
 from .serializers import AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
 from .utils import FoliumMap
+from .forms import PersonForm
 from .events_calendar import EventCalendar
 
 
@@ -38,6 +40,19 @@ def new_calendar(request, year, month):
 	all_years = range(1998, 2021)
 	return render(request, 'core/calendar.html',
 		{'calendar': calendar, 'month': month, 'year': year, 'all_years': all_years})
+
+
+def edit_persons(request, event_id):
+	PersonFormSet = modelformset_factory(Person, fields=['name', 'family'])
+	event = Event.objects.get(id=event_id)
+	if request.method == 'POST':
+		myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=662))
+		if myformset.is_valid():
+			myformset.save()
+	else:
+		myformset = PersonFormSet(queryset=Person.objects.filter(event__id=662))
+
+	return render(request, 'core/edit_persons.html', {'myformset': myformset, 'event': event})
 
 
 # Class-based views
@@ -74,6 +89,7 @@ class PersonListView(ListView):
 class PersonUpdate(UpdateView):
 	model = Person
 	fields = ['name', 'second_name', 'family']
+	success_url = reverse_lazy('core:persons')
 
 
 class PersonDelete(DeleteView):
@@ -85,6 +101,7 @@ class EventUpdate(UpdateView):
 	model = Event
 	fields = ['description', 'people']
 	success_url = reverse_lazy('core:events')
+	
 
 
 class FoliumView(TemplateView):
