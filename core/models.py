@@ -4,9 +4,9 @@ from django.forms import ModelForm
 
 
 class Person(models.Model):
-	name = models.CharField(max_length=300, blank=True)
-	second_name = models.CharField(max_length=300, blank=True)
-	family = models.CharField(max_length=300, blank=True)
+	name = models.CharField(max_length=300, blank=True, verbose_name='Имя')
+	second_name = models.CharField(max_length=300, blank=True, verbose_name='Отчество')
+	family = models.CharField(max_length=300, blank=True, verbose_name='Фамилия')
 
 	class Meta:
 		verbose_name = "Person"
