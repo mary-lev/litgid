@@ -3,12 +3,12 @@ import os
 import markdown
 
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, TemplateView
 from django.urls import reverse_lazy
-from django.views.defaults import page_not_found
 from django.forms import modelformset_factory
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+
 from rest_framework import viewsets
 
 from litgid.settings import BASE_DIR
@@ -16,7 +16,7 @@ from .serializers import EventSerializer, PlaceSerializer
 from .serializers import AdressSerializer, PersonSerializer
 from .models import Event, Place, Adress, Person
 from .utils import FoliumMap
-from .forms import PersonForm
+from .forms import PersonEventForm
 from .events_calendar import EventCalendar
 
 
@@ -58,7 +58,7 @@ def edit_persons(request, event_id):
 			myformset.save()
 			return redirect('core:one_event', pk=event_id)
 	else:
-		myformset = PersonFormSet(queryset=Person.objects.filter(event__id=event_id))
+		myformset = PersonFormSet(queryset=Person.objects.filter(event__id=event_id))	
 
 	return render(request, 'core/edit_persons.html', {'myformset': myformset, 'event': event})
 
