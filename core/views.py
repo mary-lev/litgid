@@ -5,6 +5,7 @@ import markdown
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
 from django.urls import reverse_lazy
+from django.views.defaults import page_not_found
 from django.forms import modelformset_factory
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
@@ -18,6 +19,12 @@ from .utils import FoliumMap
 from .forms import PersonForm
 from .events_calendar import EventCalendar
 
+
+def custom_handler404(request, exception):
+	return render(request, '404.html', status=404)
+
+def custom_handler500(request):
+	return render(request, '404.html', status=500)
 
 def index(request):
 	cards = random.sample(list(Event.objects.all()), 3)

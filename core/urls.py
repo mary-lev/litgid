@@ -6,7 +6,11 @@ from .views import EventListView, PlaceListView,\
 					PersonListView, PersonDetailView, \
 					FoliumView
 from .views import PersonUpdate, PersonDelete, EventUpdate
+from .views import custom_handler404, custom_handler500
 
+
+handler404 = views.custom_handler404
+handler500 = views.custom_handler500
 
 router = routers.DefaultRouter()
 router.register(r'api_events', views.EventViewSet)
