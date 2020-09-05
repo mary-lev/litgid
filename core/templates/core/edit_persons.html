@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Редактирование события</h3>
-{{ event.description}}
 
-<div id="form_set">
+<div class="card">
+  <div class="card-header">
+  	<h3>Редактирование события</h3>
+		{{ event.description}}
+  </div>
+<div class="card-body">
+    <h5 class="card-title">Участники</h5>
+	<div id="form_set">
 
-	<form method='POST'>
-	{% csrf_token %}
-    	{{ myformset.management_form }}
-            {% for form in myformset %}
-            	<p>{{ form }}</p>
-            {% endfor %}
-
+		<form method='POST'>
+		{% csrf_token %}
+    		{{ myformset.management_form }}
+            	{% for form in myformset %}
+            		<p>{{ form }}</p>
+            	{% endfor %}
         <input type="submit" value="Submit" class="btn btn-primary">
-    </form>
+    	</form>
+	</div>
 </div>
-
 {% endblock %}
 

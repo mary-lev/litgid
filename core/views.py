@@ -43,7 +43,7 @@ def new_calendar(request, year, month):
 
 
 def edit_persons(request, event_id):
-	PersonFormSet = modelformset_factory(Person, fields=['name', 'family'])
+	PersonFormSet = modelformset_factory(Person, fields=['name', 'second_name','family'])
 	event = Event.objects.get(id=event_id)
 	if request.method == 'POST':
 		myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=event_id))
