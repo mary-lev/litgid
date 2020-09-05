@@ -105,9 +105,8 @@ class EventUpdate(UpdateView):
 	fields = ['description', 'people']
 
 	def get_success_url(self):
-		return reverse_lazy('core:one_event', pk=self.id)
+		return reverse_lazy('core:one_event', args=([self.object.id]))
 	
-
 
 class FoliumView(TemplateView):
 	template_name = 'core/map.html'
