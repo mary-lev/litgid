@@ -46,11 +46,11 @@ def edit_persons(request, event_id):
 	PersonFormSet = modelformset_factory(Person, fields=['name', 'family'])
 	event = Event.objects.get(id=event_id)
 	if request.method == 'POST':
-		myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=662))
+		myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=event_id))
 		if myformset.is_valid():
 			myformset.save()
 	else:
-		myformset = PersonFormSet(queryset=Person.objects.filter(event__id=662))
+		myformset = PersonFormSet(queryset=Person.objects.filter(event__id=event_id))
 
 	return render(request, 'core/edit_persons.html', {'myformset': myformset, 'event': event})
 
