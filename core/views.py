@@ -2,7 +2,7 @@ import random
 import os
 import markdown
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
 from django.urls import reverse_lazy
 from django.forms import modelformset_factory
@@ -49,6 +49,7 @@ def edit_persons(request, event_id):
 		myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=event_id))
 		if myformset.is_valid():
 			myformset.save()
+			return redirect('core:one_event', pk=event_id)
 	else:
 		myformset = PersonFormSet(queryset=Person.objects.filter(event__id=event_id))
 

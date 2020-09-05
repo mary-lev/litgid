@@ -13,7 +13,7 @@
     <blockquote class="blockquote mb-0"><small>
       <ul>
       {% for event in object.event.all %}
-      <li><b>{{ event.date }}</b> {{event.description|truncatewords:300}} </li>
+      <li><b><a href="{% url 'core:one_event' event.id %}">{{ event.date }}</a></b> {{event.description|truncatewords:300}} </li>
       <p>{% for p in event.people.all %} <a href="{% url 'core:one_person' p.id %}" class="btn btn-outline-secondary">{{p.show_full_name}} </a> {% endfor %}</p>
       {% endfor %}</small>
     </ul>
