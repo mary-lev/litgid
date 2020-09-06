@@ -8,6 +8,7 @@
     {{ object.date }}
     <a href="{% url 'core:event_edit' object.id %}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">Edit event</a> 
     <a href="{% url 'core:edit_persons' object.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button">Edit persons</a>
+     <a href="{% url 'core:person_add' object.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button">Add person</a>
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
