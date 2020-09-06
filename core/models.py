@@ -3,9 +3,9 @@ from django.urls import reverse
 
 
 class Person(models.Model):
-	name = models.CharField(max_length=300, blank=True, verbose_name='Имя')
-	second_name = models.CharField(max_length=300, blank=True, verbose_name='Отчество')
-	family = models.CharField(max_length=300, blank=True, verbose_name='Фамилия')
+	name = models.CharField(max_length=300, blank=True, null=True, verbose_name='Имя')
+	second_name = models.CharField(max_length=300, blank=True, null=True, verbose_name='Отчество')
+	family = models.CharField(max_length=300, blank=True, null=True, verbose_name='Фамилия')
 
 	class Meta:
 		verbose_name = "Person"
@@ -20,16 +20,23 @@ class Person(models.Model):
 		return reverse('core:one_person', args=[self.id])
 
 	def show_full_name(self):
+		if self.second_name:
+			second_name = self.second_name
+		else:
+			second_name = ''
+
 		return '{0} {1} {2}'.format(
 			self.name,
-			self.second_name,
+			second_name,
 			self.family)
 
 
 class Adress(models.Model):
 	name = models.CharField(max_length=300)
-	coordinates = models.CharField(
-		max_length=300, blank=True, null=True)
+	lon = models.DecimalField(
+		max_digits=10, decimal_places=8, blank=True, null=True)
+	lat = models.DecimalField(
+		max_digits=10, decimal_places=8, blank=True, null=True)
 
 	class Meta:
 		app_label = 'core'

@@ -52,7 +52,10 @@ def new_calendar(request, year, month):
 
 
 def edit_persons(request, event_id):
-    PersonFormSet = modelformset_factory(Person, fields=['name', 'second_name', 'family'], can_delete=True)
+    PersonFormSet = modelformset_factory(
+        Person,
+        fields=['name', 'second_name', 'family'],
+        can_delete=True)
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
         myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=event_id))
@@ -117,7 +120,7 @@ class PersonUpdate(UpdateView):
     fields = ['name', 'second_name', 'family']
 
     def get_success_url(self):
-        return reverse_lazy('core:one_person', pk=self.id)
+        return reverse_lazy('core:one_person', args=([self.object.id]))
 
 
 class PersonDelete(DeleteView):

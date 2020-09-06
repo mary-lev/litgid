@@ -7,15 +7,15 @@ from django.core.exceptions import MultipleObjectsReturned
 
 
 settings.configure(DATABASES = {
-    'default': {
+   'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    "NAME": 'd2dduh8uv55mmo',
-    "USER": 'eihcelafrqojnn',
-    "PASSWORD": 
-'c3221b4a66ae8696d7c9cc3e3db08037c60d584ad0d5fa84ae206522288f2b7a',
-    "HOST": "ec2-54-228-209-117.eu-west-1.compute.amazonaws.com", 
+    "NAME": 'db0ic13kt362fa',
+    "USER": 'beytgschuzelxe',
+    "PASSWORD":
+        'd5d152b6eddab38aabdfefe4e22ca5abc3d69656240c3a101240e240c85e1c47',
+    "HOST": "ec2-34-253-148-186.eu-west-1.compute.amazonaws.com",
     "PORT": "5432",
- }
+}
 })
 django.setup()
 
@@ -24,7 +24,7 @@ from models import Event, Place, Adress, Person
 
 
 def main():
-	with open('c:/Users/anew/litgid/litgid/data/test_1_09_2020.json',
+	with open('c:/Users/anew/litgid/litgid/data/test_6_09_2020.json',
 				encoding='utf-8') as f:
 		data = json.loads(f.read())
 		for line in data['data'][:500]:
@@ -32,21 +32,24 @@ def main():
 			place, created = Place.objects.get_or_create(
 				name=line['place'])
 			adress, created = Adress.objects.get_or_create(
-				name=line['adress'],
-				coordinates=line['coordinates'],
+				lon=line['lon'],
+				lat=line['lat'],
+				name=line['adress']
 				)
 			event = Event.objects.create(
 				description = line['event'],
 				date = datetime.strptime(
-					line['date'], '%Y-%m-%d %H:%M:%S'),
+					' '.join([line['day'], line['hour']]), '%d.%m.%Y %H:%M'),
 				place = place,
 				adress = adress,
 				)
 
 			event.save()
-			for one in set(line['names']):
+			print(type(line['names']))
+			for one in line['names']:
+				one = [all if all is not None else '' for all in one]
 				try:
-					person, created = Person.objects.get_or_create(name=one)
+					person, created = Person.objects.get_or_create(name=one[0], second_name=one[1], family=one[2])
 					event.people.add(person)
 				except (MultipleObjectsReturned):
 					pass
