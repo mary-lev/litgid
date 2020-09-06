@@ -112,7 +112,7 @@ class PlaceListView(ListView):
 class PersonListView(ListView):
     paginate_by = 25
     model = Person
-    queryset = Person.objects.order_by('name')
+    queryset = Person.objects.order_by('family')
 
 
 class PersonUpdate(UpdateView):
