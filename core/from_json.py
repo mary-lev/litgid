@@ -4,18 +4,15 @@ import django
 from django.conf import settings
 
 from django.core.exceptions import MultipleObjectsReturned
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 settings.configure(DATABASES = {
    'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    "NAME": 'db0ic13kt362fa',
-    "USER": 'beytgschuzelxe',
-    "PASSWORD":
-        'd5d152b6eddab38aabdfefe4e22ca5abc3d69656240c3a101240e240c85e1c47',
-    "HOST": "ec2-34-253-148-186.eu-west-1.compute.amazonaws.com",
-    "PORT": "5432",
-}
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 })
 django.setup()
 
@@ -24,10 +21,10 @@ from models import Event, Place, Adress, Person
 
 
 def main():
-	with open('c:/Users/anew/litgid/litgid/data/test_6_09_2020.json',
+	with open('c:/Users/anew/litgid/litgid/data/names_coors.json',
 				encoding='utf-8') as f:
 		data = json.loads(f.read())
-		for line in data['data'][:500]:
+		for line in data['data']:
 			print(line)
 			place, created = Place.objects.get_or_create(
 				name=line['place'])
