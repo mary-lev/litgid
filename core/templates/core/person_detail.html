@@ -5,7 +5,7 @@
 
 <div class="card">
   <div class="card-header">
-    {{ object.name }} {{object.second_name}} {{ object.family }} 
+    {{ object.show_full_name }}  
     <a href="{% url 'core:person_update' person.id %}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">Edit</a>
      <a href="{% url 'core:person_delete' person.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button">Delete</a>
   </div>
