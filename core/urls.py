@@ -10,6 +10,7 @@ from .views import PersonUpdate, PersonDelete, EventUpdate
 handler404 = views.custom_handler404
 handler500 = views.custom_handler500
 
+
 router = routers.DefaultRouter()
 router.register(r'api_events', views.EventViewSet)
 router.register(r'api_places', views.PlaceViewSet)
