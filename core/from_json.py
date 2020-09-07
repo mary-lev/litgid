@@ -28,11 +28,15 @@ def main():
 			print(line)
 			place, created = Place.objects.get_or_create(
 				name=line['place'])
-			adress, created = Adress.objects.get_or_create(
-				lon=line['lon'],
-				lat=line['lat'],
-				name=line['adress']
-				)
+			if line['lon']:
+				adress, created = Adress.objects.get_or_create(
+					lon=line['lon'],
+					lat=line['lat'],
+					name=line['adress']
+					)
+			else:
+				adress, created = Adress.objects.get_or_create(
+					name=line['adress'])
 			event = Event.objects.create(
 				description = line['event'],
 				date = datetime.strptime(
@@ -44,9 +48,10 @@ def main():
 			event.save()
 			print(type(line['names']))
 			for one in line['names']:
-				one = [all if all is not None else '' for all in one]
 				try:
-					person, created = Person.objects.get_or_create(name=one[0], second_name=one[1], family=one[2])
+					person, created = Person.objects.get_or_create(
+						name=one[0],
+						family=one[2])
 					event.people.add(person)
 				except (MultipleObjectsReturned):
 					pass

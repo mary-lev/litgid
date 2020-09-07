@@ -10,7 +10,7 @@ class Person(models.Model):
 	class Meta:
 		verbose_name = "Person"
 		app_label = 'core'
-		unique_together = (('name', 'second_name', 'family'),)
+		unique_together = (('name', 'family'),)
 		ordering = ['family']
 
 	def __str__(self):
