@@ -140,7 +140,11 @@ class FoliumView(TemplateView):
     template_name = 'core/map.html'
 
     def get_context_data(self, **kwargs):
-        queryset = Adress.objects.all().distinct()
+        queryset = Adress.objects.filter(lat__isnull=False).values(
+            'event__place__name',
+            'event__place__id',
+            'lat',
+            'lon').distinct()
         events_map = FoliumMap(queryset).create_folium_map()
         return {'map': events_map}
 

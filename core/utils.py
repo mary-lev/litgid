@@ -19,12 +19,11 @@ class FoliumMap:
         marker_cluster = MarkerCluster().add_to(events_map)
 
         for adress in self.queryset:
-            (lat, lon) = (adress.lon, adress.lat)
-            place = Place.objects.filter(event__adress=adress.id).distinct()[0]
-            link = "/place/{}".format(place.id)
-            text = folium.Html("<a href='{}'>{}</a>".format(link, place.name), script=True)
+            link = "/place/{}".format(adress['event__place__id'])
+            text = folium.Html("<a href='{}'>{}</a>".format(
+                link, adress['event__place__name']), script=True)
             folium.Marker(
-                location=(lon, lat),
+                location=(adress['lat'], adress['lon']),
                 popup=folium.Popup(text),
                 icon=folium.Icon(color='green')
             ).add_to(marker_cluster)
