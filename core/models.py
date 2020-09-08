@@ -78,5 +78,8 @@ class Event(models.Model):
 		verbose_name = 'Event'
 		ordering = ['date']
 
+	def __str__(self):
+		return self.description
+
 	def get_absolute_url(self):
 		return reverse('core:one_event', args=[self.id])
