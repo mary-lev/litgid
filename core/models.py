@@ -11,7 +11,7 @@ class Person(models.Model):
 		verbose_name = "Person"
 		app_label = 'core'
 		unique_together = (('name', 'family'),)
-		ordering = ['family']
+		ordering = ['family', 'name']
 
 	def __str__(self):
 		return self.name
