@@ -131,9 +131,9 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/admin')
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+#STATICFILES_DIRS = [
+#    BASE_DIR / "static",
+#]
 
 INTERNAL_IPS = [
     '127.0.0.1',
