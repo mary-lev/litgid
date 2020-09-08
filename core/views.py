@@ -135,7 +135,7 @@ class PersonUpdate(UpdateView):
         for event in events:
             event.people.add(person_for_add)
             event.people.remove(person_for_delete)
-        return redirect('core:one_person', args=([self.object.id]))
+        return redirect('core:one_person', pk=self.object.id)
 
     def get_success_url(self):
         return reverse_lazy('core:one_person', args=([self.object.id]))
