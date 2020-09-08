@@ -25,7 +25,7 @@ def main():
 				encoding='utf-8') as f:
 		data = json.loads(f.read())
 		for line in data['data']:
-			if line['index'] > 10816:
+			if line['index'] > 12661:
 				print(line)
 				place, created = Place.objects.get_or_create(
 					name=line['place'])
@@ -38,13 +38,21 @@ def main():
 				else:
 					adress, created = Adress.objects.get_or_create(
 						name=line['adress'])
-				event = Event.objects.create(
-					description = line['event'],
-					date = datetime.strptime(
-						' '.join([line['day'], line['hour']]), '%d.%m.%Y %H:%M'),
-					place = place,
-					adress = adress,
-					)
+				try:
+					event = Event.objects.create(
+						description = line['event'],
+						date = datetime.strptime(
+							' '.join([line['day'], line['hour']]), '%d.%m.%Y %H:%M'),
+						place = place,
+						adress = adress,
+						)
+				except:
+					event = Event.objects.create(
+						description = line['event'],
+						date = datetime.strptime('11.09.2007 20:00', '%d.%m.%Y %H:%M'),
+						place = place,
+						adress = adress,
+						)
 
 				event.save()
 				print(type(line['names']))

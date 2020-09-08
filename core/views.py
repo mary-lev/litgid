@@ -10,7 +10,6 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
 from rest_framework import viewsets
-from django_super_deduper.merge import MergedModelInstance
 
 from litgid.settings import BASE_DIR
 from .serializers import EventSerializer, PlaceSerializer
@@ -49,7 +48,10 @@ def new_calendar(request, year, month):
     calendar = EventCalendar(selected_events, year, month)
     all_years = range(1998, 2021)
     return render(request, 'core/calendar.html',
-                  {'calendar': calendar, 'month': month, 'year': year, 'all_years': all_years})
+                  {'calendar': calendar,
+                  'month': month,
+                  'year': year,
+                  'all_years': all_years})
 
 
 def edit_persons(request, event_id):
@@ -60,7 +62,7 @@ def edit_persons(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
         myformset = PersonFormSet(request.POST,
-            queryset=Person.objects.filter(event__id=event_id))
+                                    queryset=Person.objects.filter(event__id=event_id))
         if myformset.is_valid():
             myformset.save()
             return redirect('core:one_event', pk=event_id)
@@ -69,7 +71,7 @@ def edit_persons(request, event_id):
             queryset=Person.objects.filter(event__id=event_id))
 
     return render(request, 'core/edit_persons.html', {
-        'myformset': myformset, 
+        'myformset': myformset,
         'event': event})
 
 
@@ -82,12 +84,16 @@ def update_event_with_person(request, event_id):
             event.people.add(person)
         else:
             person = form.cleaned_data
-            add_person = Person.objects.get(name=person['name'], family=person['family'])
+            add_person = Person.objects.get(
+                name=person['name'],
+                family=person['family'])
             event.people.add(add_person)
         return redirect('core:one_event', pk=event_id)
     else:
         form = PersonForm()
-    return render(request, 'core/person_add.html', {'form': form, 'event_id': event_id})
+    return render(request, 'core/person_add.html', {
+        'form': form, 
+        'event_id': event_id})
 
 
 # Class-based views
@@ -127,7 +133,6 @@ class PersonUpdate(UpdateView):
     fields = ['name', 'second_name', 'family', 'pseudonym']
 
     def form_invalid(self, form):
-        response = super().form_invalid(form)
         events = Event.objects.filter(people__id=self.object.id).all()
         person_for_add = Person.objects.get(name=form.cleaned_data['name'],
                 family=form.cleaned_data['family'])

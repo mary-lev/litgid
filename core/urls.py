@@ -30,11 +30,13 @@ urlpatterns = [
     path('place/<pk>/', PlaceDetailView.as_view(), name='one_place'),
     path('person/<pk>/', PersonDetailView
          .as_view(), name='one_person'),
-    path('person_add/<int:event_id>/', views.update_event_with_person, name='person_add'),
+    path('person_add/<int:event_id>/', views.update_event_with_person,
+        name='person_add'),
     path('person_update/<pk>/', PersonUpdate.as_view(), name='person_update'),
     path('person_delete/<pk>', PersonDelete.as_view(), name='person_delete'),
     path('event_edit/<pk>/', EventUpdate.as_view(), name="event_edit"),
-    path('edit_persons/<int:event_id>/', views.edit_persons, name='edit_persons'),
+    path('edit_persons/<int:event_id>/', views.edit_persons,
+        name='edit_persons'),
     path('map', FoliumView.as_view(), name='map'),
     path('api/', include(router.urls)),
     path('api-auth/', include(
