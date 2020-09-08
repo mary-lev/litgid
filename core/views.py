@@ -58,27 +58,18 @@ def edit_persons(request, event_id):
         fields=['name', 'second_name', 'family'],
         can_delete=True)
     event = Event.objects.get(id=event_id)
-    #NewPersonFormSet = modelformset_factory(
-    #    Person,
-    #    fields=['name', 'second_name', 'family'])
     if request.method == 'POST':
-        myformset = PersonFormSet(request.POST, queryset=Person.objects.filter(event__id=event_id))
-    #    my_new_formset = NewPersonFormSet(request.POST)
+        myformset = PersonFormSet(request.POST,
+            queryset=Person.objects.filter(event__id=event_id))
         if myformset.is_valid():
             myformset.save()
             return redirect('core:one_event', pk=event_id)
-#        if my_new_formset.is_valid():
-#            new_person = my_new_formset.save(commit=False)
-#            event.people.add(new_person)
-#            new_person.save_m2m()
-#            return redirect('core:one_event', pk=event_id)
     else:
-        myformset = PersonFormSet(queryset=Person.objects.filter(event__id=event_id))
-    #    my_new_formset = NewPersonFormSet()
+        myformset = PersonFormSet(
+            queryset=Person.objects.filter(event__id=event_id))
 
     return render(request, 'core/edit_persons.html', {
         'myformset': myformset, 
-        #'my_new_formset': my_new_formset, 
         'event': event})
 
 
@@ -87,19 +78,13 @@ def update_event_with_person(request, event_id):
     if request.method == 'POST':
         form = PersonForm(request.POST)
         if form.is_valid():
-            person = form.save(commit=False)
-            #if Person.objects.filter(name=person['name'], family=person['family']).exists():
-            #    messages.error(request, 'person already exists')
-                #event.people.add(Person.objects.get(name=person['name'], family=person['family']))
-                #return redirect('core:one_event', pk=event_id)
+            person = form.save()
             event.people.add(person)
-            person.save()
-            return redirect('core:one_event', pk=event_id)
         else:
             person = form.cleaned_data
             add_person = Person.objects.get(name=person['name'], family=person['family'])
             event.people.add(add_person)
-            return redirect('core:one_event', pk=event_id)
+        return redirect('core:one_event', pk=event_id)
     else:
         form = PersonForm()
     return render(request, 'core/person_add.html', {'form': form, 'event_id': event_id})
