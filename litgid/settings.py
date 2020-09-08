@@ -1,5 +1,7 @@
 from pathlib import Path
 import os
+
+import django_heroku
 from .secret_setting import SECRET_KEY
 
 
@@ -139,3 +141,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/admin')
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+django_heroku.settings(locals())
