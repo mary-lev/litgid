@@ -30,8 +30,6 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'bootstrap4',
-    'debug_toolbar',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
