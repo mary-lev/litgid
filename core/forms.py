@@ -5,7 +5,7 @@ from .models import Event, Place, Adress, Person
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'second_name', 'family']
+        fields = ['name', 'second_name', 'family', 'pseudonym']
 
 class PersonEventForm(forms.Form):
     name = forms.CharField(label='Имя', max_length=20)

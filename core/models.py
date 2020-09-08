@@ -6,6 +6,7 @@ class Person(models.Model):
 	name = models.CharField(max_length=300, blank=True, null=True, verbose_name='Имя')
 	second_name = models.CharField(max_length=300, blank=True, null=True, verbose_name='Отчество')
 	family = models.CharField(max_length=300, blank=True, null=True, verbose_name='Фамилия')
+	pseudonym = models.CharField(max_length=100, blank=True, verbose_name='Псевдоним')
 
 	class Meta:
 		verbose_name = "Person"
@@ -76,9 +77,6 @@ class Event(models.Model):
 		app_label = 'core'
 		verbose_name = 'Event'
 		ordering = ['date']
-
-	def __str__(self):
-		return self.description
 
 	def get_absolute_url(self):
 		return reverse('core:one_event', args=[self.id])
