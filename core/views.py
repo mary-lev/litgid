@@ -99,6 +99,7 @@ def update_event_with_person(request, event_id):
 # Class-based views
 class EventCreateView(CreateView):
     model = Event
+    fields = "__all__"
 
 
 class EventDetailView(DetailView):
