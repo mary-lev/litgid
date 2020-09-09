@@ -9,10 +9,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 settings.configure(DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+  'default': { 
+    'ENGINE': 'django.db.backends.postgresql',  
+    "NAME": 'da4rq88jm0mqau',   
+    "USER": 'mwhsdublpfnxzk',   
+    "PASSWORD": 
+        '5318dc42f30f24c0cd558200d99e66ac33cc906c61eb8465cd9ee69cabca0a9f', 
+    "HOST": "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com",   
+    "PORT": "5432", 
+}
 })
 django.setup()
 
@@ -25,7 +30,7 @@ def main():
 				encoding='utf-8') as f:
 		data = json.loads(f.read())
 		for line in data['data']:
-			if line['index'] > 12661:
+			if line['index'] > 1078:
 				print(line)
 				place, created = Place.objects.get_or_create(
 					name=line['place'])

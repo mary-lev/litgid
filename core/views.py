@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.forms import modelformset_factory
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 
 from rest_framework import viewsets
@@ -97,6 +97,10 @@ def update_event_with_person(request, event_id):
 
 
 # Class-based views
+class EventCreateView(CreateView):
+    model = Event
+
+
 class EventDetailView(DetailView):
     model = Event
 
