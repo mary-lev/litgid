@@ -30,7 +30,7 @@ def main():
 				encoding='utf-8') as f:
 		data = json.loads(f.read())
 		for line in data['data']:
-			if line['index'] > 1078:
+			if line['index'] > 2351:
 				print(line)
 				place, created = Place.objects.get_or_create(
 					name=line['place'])

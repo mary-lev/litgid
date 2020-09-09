@@ -5,7 +5,7 @@ from .views import EventListView, PlaceListView, \
     EventDetailView, PlaceDetailView, \
     PersonListView, PersonDetailView, \
     FoliumView
-from .views import PersonUpdate, PersonDelete, CreateEventView, EventUpdate
+from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
 
 handler404 = views.custom_handler404
 handler500 = views.custom_handler500
@@ -23,7 +23,7 @@ urlpatterns = [
     path('research', views.research, name='research'),
     path('calendar/<int:year>/<int:month>', views
          .new_calendar, name='calendar'),
-    path('event_create', CreateEventView.as_view(), name='event_create'),
+    path('event_create', EventCreateView.as_view(), name='event_create'),
     path('places', PlaceListView.as_view(), name='places'),
     path('events', EventListView.as_view(), name='events'),
     path('persons', PersonListView.as_view(), name='persons'),
