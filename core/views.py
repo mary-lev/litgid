@@ -2,6 +2,7 @@ import random
 import os
 import markdown
 
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.forms import modelformset_factory
@@ -130,7 +131,7 @@ class PlaceListView(ListView):
 class PersonListView(ListView):
     paginate_by = 25
     model = Person
-    queryset = Person.objects.order_by('family')
+    queryset = Person.objects.all().annotate(events=Count('event')).order_by('-events')
 
 
 class PersonUpdate(UpdateView):
