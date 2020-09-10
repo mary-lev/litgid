@@ -134,6 +134,11 @@ class PersonListView(ListView):
     queryset = Person.objects.all().annotate(events=Count('event')).order_by('-events')
 
 
+class NormalPersonListView(ListView):
+    model = Person
+    paginate_by = 25
+    queryset = Person.objects.all().order_by('family', 'name')
+
 class PersonUpdate(UpdateView):
     model = Person
     fields = ['name', 'second_name', 'family', 'pseudonym']

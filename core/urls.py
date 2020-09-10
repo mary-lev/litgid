@@ -3,7 +3,7 @@ from rest_framework import routers
 from . import views
 from .views import EventListView, PlaceListView, \
     EventDetailView, PlaceDetailView, \
-    PersonListView, PersonDetailView, \
+    PersonListView, NormalPersonListView, PersonDetailView, \
     FoliumView
 from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('places', PlaceListView.as_view(), name='places'),
     path('events', EventListView.as_view(), name='events'),
     path('persons', PersonListView.as_view(), name='persons'),
+    path('persons_order', NormalPersonListView.as_view(), name='persons_order'),
     path('event/<pk>/', EventDetailView.as_view(), name='one_event'),
     path('place/<pk>/', PlaceDetailView.as_view(), name='one_place'),
     path('person/<pk>/', PersonDetailView
