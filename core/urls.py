@@ -3,8 +3,8 @@ from rest_framework import routers
 from . import views
 from .views import EventListView, PlaceListView, \
     EventDetailView, PlaceDetailView, \
-    PersonListView, NormalPersonListView, PersonDetailView, \
-    FoliumView
+    PersonListView, NormalPersonListView, PersonDetailView,\
+    PersonSearch, FoliumView
 from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
 
 handler404 = views.custom_handler404
@@ -21,6 +21,7 @@ app_name = 'core'
 urlpatterns = [
     path('', views.index, name='index'),
     path('research', views.research, name='research'),
+    path('search_person', PersonSearch.as_view(), name='search_person'),
     path('calendar/<int:year>/<int:month>', views
          .new_calendar, name='calendar'),
     path('event_create', EventCreateView.as_view(), name='event_create'),

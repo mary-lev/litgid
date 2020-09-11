@@ -2,8 +2,10 @@
 
 
 {% block content %}
+
 <h1 class="display-4">Персонажи</h1>
 <small><a href='{% url "core:persons_order" %}'>По фамилии</a></small> | <small><a href='{% url "core:persons" %}'>По популярности</a></small>
+
 <ul>
 	{% for person in object_list %}
 	<li><a href="{% url 'core:one_person' person.id %}">{{ person.show_full_name }} ({{person.event.all.count}}) </a></li>

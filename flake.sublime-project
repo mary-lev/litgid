@@ -1,0 +1,35 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"flake8lint":
+		{
+			"builtins":
+			[
+			],
+			"complexity": -1,
+			"ignore":
+			[
+			],
+			"ignore_files":
+			[
+			],
+			"import-order": true,
+			"import-order-style": "google",
+			"naming": true,
+			"pep8": true,
+			"pep8_max_line_length": 79,
+			"pydocstyle": true,
+			"pyflakes": true,
+			"python_interpreter": "auto",
+			"select":
+			[
+			]
+		}
+	}
+}

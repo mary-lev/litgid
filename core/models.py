@@ -3,10 +3,14 @@ from django.urls import reverse
 
 
 class Person(models.Model):
-	name = models.CharField(max_length=300, blank=True, null=True, verbose_name='Имя')
-	second_name = models.CharField(max_length=300, blank=True, null=True, verbose_name='Отчество')
-	family = models.CharField(max_length=300, blank=True, null=True, verbose_name='Фамилия')
-	pseudonym = models.CharField(max_length=100, blank=True, verbose_name='Псевдоним')
+	name = models.CharField(max_length=300, blank=True, null=True,
+						verbose_name='Имя')
+	second_name = models.CharField(max_length=300, blank=True, null=True,
+						verbose_name='Отчество')
+	family = models.CharField(max_length=300, blank=True, null=True,
+						verbose_name='Фамилия')
+	pseudonym = models.CharField(max_length=100, blank=True,
+						verbose_name='Псевдоним')
 
 	class Meta:
 		verbose_name = "Person"

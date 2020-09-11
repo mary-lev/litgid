@@ -9,6 +9,7 @@ from django.forms import modelformset_factory
 from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
+from django.db.models import Q
 
 from rest_framework import viewsets
 
@@ -132,6 +133,13 @@ class PersonListView(ListView):
     paginate_by = 25
     model = Person
     queryset = Person.objects.all().annotate(events=Count('event')).order_by('-events')
+
+
+class PersonSearch(PersonListView):
+    def get_queryset(self):
+        query = self.request.GET.get('search', '')
+        return Person.objects.filter(
+            Q(family__icontains=query) | Q(name__icontains=query))
 
 
 class NormalPersonListView(ListView):
