@@ -98,6 +98,24 @@ def update_event_with_person(request, event_id):
         'event_id': event_id})
 
 
+def detach_person_from_event(request, event_id, person_id):
+    event = Event.objects.get(id=event_id)
+    person = Person.objects.get(id=person_id)
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            event.people.remove(person)
+        return redirect('core:one_event', pk=event_id)
+    else:
+        form = PersonForm(instance=person)
+    return render(request, 'core/person_detach.html', {
+        'form': form,
+        'event_id': event_id,
+        'event': event,
+        'person_id': person_id
+        })
+
+
 # Class-based views
 class EventCreateView(CreateView):
     model = Event
