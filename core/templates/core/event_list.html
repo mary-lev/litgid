@@ -5,7 +5,7 @@
 <h1 class="display-4">События</h1>
 <ul>
 	{% for event in object_list %}
-	<li><b>{{ event.date|date }}</b>. <a href="{% url 'core:one_event' event.id %}">{{ event.description|truncatewords:10 }}</a> <em> {{ event.place.name }} </em></li>
+	<li><b>{{ event.date|date: "D d M Y" }} {{ event.date|time: "H:i" }}</b>. <a href="{% url 'core:one_event' event.id %}">{{ event.description|truncatewords:10 }}</a> <em> {{ event.place.name }} </em></li>
 	{% endfor %}
 </ul>
 
