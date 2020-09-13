@@ -1,25 +1,24 @@
-import random
 import os
-import markdown
+import random
 
+import markdown
 from django.db.models import Count
+from django.db.models import Q
+from django.forms import modelformset_factory
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.forms import modelformset_factory
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-from django.db.models import Q
-
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from litgid.settings import BASE_DIR
 from rest_framework import viewsets
 
-from litgid.settings import BASE_DIR
-from .serializers import EventSerializer, PlaceSerializer
-from .serializers import AdressSerializer, PersonSerializer
-from .models import Event, Place, Adress, Person
-from .utils import FoliumMap
-from .forms import PersonForm
 from .events_calendar import EventCalendar
+from .forms import PersonForm
+from .models import Event, Place, Adress, Person
+from .serializers import AdressSerializer, PersonSerializer
+from .serializers import EventSerializer, PlaceSerializer
+from .utils import FoliumMap
 
 
 def custom_handler404(request, exception):
@@ -52,9 +51,9 @@ def new_calendar(request, year, month):
     all_years = range(1998, 2021)
     return render(request, 'core/calendar.html',
                   {'calendar': calendar,
-                  'month': month,
-                  'year': year,
-                  'all_years': all_years})
+                   'month': month,
+                   'year': year,
+                   'all_years': all_years})
 
 
 def edit_persons(request, event_id):
@@ -65,7 +64,8 @@ def edit_persons(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
         myformset = PersonFormSet(request.POST,
-                                    queryset=Person.objects.filter(event__id=event_id))
+                                  queryset=Person.objects.filter(
+                                      event__id=event_id))
         if myformset.is_valid():
             myformset.save()
             return redirect('core:one_event', pk=event_id)
@@ -113,7 +113,7 @@ def detach_person_from_event(request, event_id, person_id):
         'event_id': event_id,
         'event': event,
         'person_id': person_id
-        })
+    })
 
 
 # Class-based views
@@ -150,7 +150,8 @@ class PlaceListView(ListView):
 class PersonListView(ListView):
     paginate_by = 25
     model = Person
-    queryset = Person.objects.all().annotate(events=Count('event')).order_by('-events')
+    queryset = Person.objects.all().annotate(
+        events=Count('event')).order_by('-events')
 
 
 class PersonSearch(PersonListView):
@@ -165,6 +166,7 @@ class NormalPersonListView(ListView):
     paginate_by = 25
     queryset = Person.objects.all().order_by('family', 'name')
 
+
 class PersonUpdate(UpdateView):
     model = Person
     fields = ['name', 'second_name', 'family', 'pseudonym']
@@ -172,7 +174,7 @@ class PersonUpdate(UpdateView):
     def form_invalid(self, form):
         events = Event.objects.filter(people__id=self.object.id).all()
         person_for_add = Person.objects.get(name=form.cleaned_data['name'],
-                family=form.cleaned_data['family'])
+                                            family=form.cleaned_data['family'])
         person_for_delete = Person.objects.get(id=self.object.id)
         for event in events:
             event.people.add(person_for_add)
