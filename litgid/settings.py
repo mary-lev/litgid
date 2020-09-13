@@ -2,6 +2,7 @@ import pathlib
 import os
 import django_heroku
 
+from .secret_setting import SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve(strict=True).parent.parent
@@ -78,6 +79,9 @@ REST_FRAMEWORK = {
 DATABASES = {'default':
                  {'ENGINE': 'django.db.backends.postgresql',
                   'NAME': 'da4rq88jm0mqau',
+                  "USER": 'mwhsdublpfnxzk',
+                  "PASSWORD":
+                      '5318dc42f30f24c0cd558200d99e66ac33cc906c61eb8465cd9ee69cabca0a9f',
                   'HOST': "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com",
                   'PORT': "5432"},
              'second':
@@ -107,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Belize'
 
 USE_I18N = True
 
