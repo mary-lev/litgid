@@ -4,7 +4,7 @@ from . import views
 from .views import EventListView, PlaceListView, \
     EventDetailView, PlaceDetailView, \
     PersonListView, NormalPersonListView, PersonDetailView,\
-    PersonSearch, FoliumView
+    PersonSearch, FoliumView, EventDelete
 from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
 
 handler404 = views.custom_handler404
@@ -41,6 +41,7 @@ urlpatterns = [
         name='person_detach'),
     path('person_delete/<pk>', PersonDelete.as_view(), name='person_delete'),
     path('event_edit/<pk>/', EventUpdate.as_view(), name="event_edit"),
+    path('event_delete/<pk>/', EventDelete.as_view(), name='event_delete'),
     path('edit_persons/<int:event_id>/', views.edit_persons,
         name='edit_persons'),
     path('map', FoliumView.as_view(), name='map'),

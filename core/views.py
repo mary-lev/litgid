@@ -31,7 +31,8 @@ def custom_handler500(request):
 
 
 def index(request):
-    cards = random.sample(list(Event.objects.all()), 3)
+    index_cards = 3
+    cards = random.sample(list(Event.objects.all()), index_cards)
     return render(request, 'core/index.html', {'cards': cards})
 
 
@@ -94,8 +95,9 @@ def update_event_with_person(request, event_id):
     else:
         form = PersonForm()
     return render(request, 'core/person_add.html', {
-        'form': form, 
-        'event_id': event_id})
+        'form': form,
+        'event_id': event_id,
+        'event': event})
 
 
 def detach_person_from_event(request, event_id, person_id):
@@ -192,6 +194,11 @@ class EventUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('core:one_event', args=([self.object.id]))
+
+
+class EventDelete(DeleteView):
+    model = Event
+    success_url = reverse_lazy("core:event")
 
 
 class FoliumView(TemplateView):
