@@ -1,8 +1,7 @@
 from pathlib import Path
 import os
-
+from boto.s3.connection import S3Connection
 import django_heroku
-from .secret_setting import SECRET_KEY
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -11,7 +10,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
+SECRET_KEY = S3Connection(os.environ['SECRET_KEY'])
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,18 +77,9 @@ REST_FRAMEWORK = {
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': { 
-    'ENGINE': 'django.db.backends.postgresql',  
-    "NAME": 'da4rq88jm0mqau',   
-    "HOST": "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com",
-    "PORT": "5432", 
-},
-'second': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = dict(default={'ENGINE': 'django.db.backends.postgresql', 'NAME': 'da4rq88jm0mqau',
+                          'HOST': "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com", 'PORT': "5432"}, second=dict(
+    ENGINE='django.db.backends.sqlite3', NAME=BASE_DIR / 'db.sqlite3'))
 
 
 # Password validation
