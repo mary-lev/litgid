@@ -47,9 +47,16 @@ Temporary Items
 .apdisk
 
 #secret_key
+#/litgid/secret_setting.py
+/core/from_json.py
 /litgid/secret_setting.py
+db.sqlite3
+flake.sublime-project
+flake.sublime-workspace
 
 # Byte-compiled / optimized / DLL
 __pycache__/
 
 /frontend
+/data
+/.idea
