@@ -144,13 +144,14 @@ class EventListView(ListView):
 class PlaceListView(ListView):
     paginate_by = 25
     model = Place
-    queryset = Place.objects.order_by('name')
+    queryset = Place.objects.annotate(
+        events=Count('event')).order_by('-events')
 
 
 class PersonListView(ListView):
     paginate_by = 25
     model = Person
-    queryset = Person.objects.all().annotate(
+    queryset = Person.objects.annotate(
         events=Count('event')).order_by('-events')
 
 
