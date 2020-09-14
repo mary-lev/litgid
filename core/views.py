@@ -142,6 +142,7 @@ class EventListView(ListView):
 
 
 class PlaceListView(ListView):
+
     '''Sort places by event number'''
     paginate_by = 25
     model = Place
@@ -150,6 +151,7 @@ class PlaceListView(ListView):
 
 
 class PlaceAlphabetListView(ListView):
+
     '''Sort places by place name'''
     paginate_by = 25
     model = Place
@@ -157,6 +159,7 @@ class PlaceAlphabetListView(ListView):
 
 
 class PersonListView(ListView):
+
     '''Sort persons by activity in events'''
     paginate_by = 25
     model = Person
@@ -165,6 +168,7 @@ class PersonListView(ListView):
 
 
 class NormalPersonListView(ListView):
+    
     '''Sort persons by family and name'''
     model = Person
     paginate_by = 25

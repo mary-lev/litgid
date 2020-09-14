@@ -2,8 +2,6 @@ from decimal import Decimal
 import folium
 from folium.plugins import MarkerCluster
 
-from .models import Place
-
 
 class FoliumMap:
 

@@ -8,17 +8,7 @@ from django.core.exceptions import MultipleObjectsReturned
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-settings.configure(DATABASES={
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        "NAME": 'da4rq88jm0mqau',
-        "USER": 'mwhsdublpfnxzk',
-        "PASSWORD":
-            '5318dc42f30f24c0cd558200d99e66ac33cc906c61eb8465cd9ee69cabca0a9f',
-        "HOST": "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com",
-        "PORT": "5432",
-    }
-})
+settings.configure(DATABASES={ })
 django.setup()
 
 from models import Event, Place, Adress, Person
@@ -29,7 +19,7 @@ def main():
               encoding='utf-8') as f:
         data = json.loads(f.read())
         for line in data['data']:
-            if line['index'] > 13976:
+            if line['index']:
                 print(line['index'])
                 place, created = Place.objects.get_or_create(
                     name=line['place'])
@@ -70,7 +60,4 @@ def main():
 
 
 if __name__ == '__main__':
-    import django
-
-    django.setup()
     main()
