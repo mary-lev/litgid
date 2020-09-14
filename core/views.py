@@ -142,17 +142,33 @@ class EventListView(ListView):
 
 
 class PlaceListView(ListView):
+    '''Sort places by event number'''
     paginate_by = 25
     model = Place
     queryset = Place.objects.annotate(
         events=Count('event')).order_by('-events')
 
 
+class PlaceAlphabetListView(ListView):
+    '''Sort places by place name'''
+    paginate_by = 25
+    model = Place
+    queryset = Place.objects.order_by('name')
+
+
 class PersonListView(ListView):
+    '''Sort persons by activity in events'''
     paginate_by = 25
     model = Person
     queryset = Person.objects.annotate(
         events=Count('event')).order_by('-events')
+
+
+class NormalPersonListView(ListView):
+    '''Sort persons by family and name'''
+    model = Person
+    paginate_by = 25
+    queryset = Person.objects.all().order_by('family', 'name')
 
 
 class PersonSearch(PersonListView):
@@ -160,12 +176,6 @@ class PersonSearch(PersonListView):
         query = self.request.GET.get('search', '')
         return Person.objects.filter(
             Q(family__icontains=query) | Q(name__icontains=query))
-
-
-class NormalPersonListView(ListView):
-    model = Person
-    paginate_by = 25
-    queryset = Person.objects.all().order_by('family', 'name')
 
 
 class PersonUpdate(UpdateView):
