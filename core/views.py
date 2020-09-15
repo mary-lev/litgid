@@ -168,7 +168,7 @@ class PersonListView(ListView):
 
 
 class NormalPersonListView(ListView):
-    
+
     '''Sort persons by family and name'''
     model = Person
     paginate_by = 25
@@ -215,7 +215,7 @@ class EventUpdate(UpdateView):
 
 class EventDelete(DeleteView):
     model = Event
-    success_url = reverse_lazy("core:event")
+    success_url = reverse_lazy("core:events")
 
 
 class FoliumView(TemplateView):

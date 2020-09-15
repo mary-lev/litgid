@@ -8,6 +8,7 @@ from .views import EventListView, PlaceListView, \
     PersonSearch, FoliumView, EventDelete, PlaceAlphabetListView
 from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
 
+
 handler404 = views.custom_handler404
 handler500 = views.custom_handler500
 
