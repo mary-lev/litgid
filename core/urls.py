@@ -25,15 +25,15 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login', MyLoginView.as_view(), name='login'),
     path('register', MySignupView.as_view(), name='register'),
-    path('logout', LogoutView.as_view(), {'success_url': '/'} ),
+    path('logout', LogoutView.as_view(), {'success_url': '/'}),
     path('research', views.research, name='research'),
     path('search_person', PersonSearch.as_view(), name='search_person'),
     path('calendar/<int:year>/<int:month>', views
          .new_calendar, name='calendar'),
     path('event_create', EventCreateView.as_view(), name='event_create'),
     path('places', PlaceListView.as_view(), name='places'),
-    path('places_alphabet', PlaceAlphabetListView.
-        as_view(), name='places_alphabet'),
+    path('places_alphabet', PlaceAlphabetListView
+         .as_view(), name='places_alphabet'),
     path('events', EventListView.as_view(), name='events'),
     path('persons', PersonListView.as_view(), name='persons'),
     path('persons_order', NormalPersonListView.
