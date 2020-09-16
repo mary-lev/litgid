@@ -2,6 +2,8 @@ import os
 import random
 
 import markdown
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Count
 from django.db.models import Q
 from django.forms import modelformset_factory
@@ -117,6 +119,19 @@ def detach_person_from_event(request, event_id, person_id):
 
 
 # Class-based views
+
+
+class MySignupView(CreateView):
+    form_class = UserCreationForm
+    success_url =  'core:login'
+    template_name = 'register.html'
+
+
+class MyLoginView(LoginView):
+    template_name = 'login.html'
+    success_url = '/'
+
+
 class EventCreateView(CreateView):
     model = Event
     fields = "__all__"

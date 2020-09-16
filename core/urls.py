@@ -1,5 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
+from django.contrib.auth.views import LoginView, LogoutView
 
 from . import views
 from .views import EventListView, PlaceListView, \
@@ -7,6 +8,7 @@ from .views import EventListView, PlaceListView, \
     PersonListView, NormalPersonListView, PersonDetailView, \
     PersonSearch, FoliumView, EventDelete, PlaceAlphabetListView
 from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
+from .views import MyLoginView, MySignupView
 
 
 handler404 = views.custom_handler404
@@ -21,6 +23,9 @@ router.register(r'api_persons', views.PersonViewSet)
 app_name = 'core'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('login', MyLoginView.as_view(), name='login'),
+    path('register', MySignupView.as_view(), name='register'),
+    path('logout', LogoutView.as_view()),
     path('research', views.research, name='research'),
     path('search_person', PersonSearch.as_view(), name='search_person'),
     path('calendar/<int:year>/<int:month>', views
