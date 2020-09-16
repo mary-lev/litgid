@@ -19,6 +19,7 @@ class Person(models.Model):
         ordering = ['family', 'name']
 
     def __str__(self):
+        '''Save from None in self.name '''
         return self.name if self.name else ''
 
     def get_absolute_url(self):

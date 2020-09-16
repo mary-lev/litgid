@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
 
 from . import views
 from .views import EventListView, PlaceListView, \
