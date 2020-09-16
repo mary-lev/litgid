@@ -123,7 +123,7 @@ def detach_person_from_event(request, event_id, person_id):
 
 class MySignupView(CreateView):
     form_class = UserCreationForm
-    success_url =  'core:login'
+    success_url =  reverse_lazy('core:login')
     template_name = 'register.html'
 
 
