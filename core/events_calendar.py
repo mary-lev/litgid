@@ -17,7 +17,7 @@ class EventCalendar(HTMLCalendar):
         self.month = month
 
     def formatweekday(self, day):
-        '''Return a weekday name as a table header.'''
+        """Return a weekday name as a table header."""
         return '<th class="table-primary">%s</th>' % day_abbr[day]
 
     def formatday(self, day, weekday):
