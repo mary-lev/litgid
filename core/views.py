@@ -16,7 +16,7 @@ from litgid.settings import BASE_DIR
 from rest_framework import viewsets
 
 from .events_calendar import EventCalendar
-from .forms import PersonForm
+from .forms import PersonForm, LoginForm, RegisterForm
 from .models import Event, Place, Adress, Person
 from .serializers import AdressSerializer, PersonSerializer
 from .serializers import EventSerializer, PlaceSerializer
@@ -122,12 +122,13 @@ def detach_person_from_event(request, event_id, person_id):
 
 
 class MySignupView(CreateView):
-    form_class = UserCreationForm
+    form_class = RegisterForm
     success_url = reverse_lazy('core:login')
     template_name = 'register.html'
 
 
 class MyLoginView(LoginView):
+    form_class = LoginForm
     template_name = 'login.html'
     success_url = '/'
 

@@ -2,7 +2,7 @@ import pathlib
 import os
 import django_heroku
 
-#from .secret_setting import SECRET_KEY
+from .secret_setting import SECRET_KEY
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve(strict=True).parent.parent
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'debug_toolbar',
     'django_extensions',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
