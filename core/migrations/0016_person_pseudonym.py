@@ -13,6 +13,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='person',
             name='pseudonym',
-            field=models.CharField(blank=True, max_length=100, verbose_name='Псевдоним'),
+            field=models.CharField(
+                blank=True,
+                max_length=100,
+                verbose_name='Псевдоним'
+                ),
         ),
     ]

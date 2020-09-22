@@ -3,9 +3,8 @@ import random
 
 import markdown
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import UserCreationForm
-from django.db.models import Count
-from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count, Q
 from django.forms import modelformset_factory
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -198,7 +197,7 @@ class PersonSearch(PersonListView):
             Q(family__icontains=query) | Q(name__icontains=query))
 
 
-class PersonUpdate(UpdateView):
+class PersonUpdate(LoginRequiredMixin, UpdateView):
     model = Person
     fields = ['name', 'second_name', 'family', 'pseudonym']
 
@@ -216,12 +215,12 @@ class PersonUpdate(UpdateView):
         return reverse_lazy('core:one_person', args=([self.object.id]))
 
 
-class PersonDelete(DeleteView):
+class PersonDelete(LoginRequiredMixin, DeleteView):
     model = Person
     success_url = reverse_lazy("core:persons")
 
 
-class EventUpdate(UpdateView):
+class EventUpdate(LoginRequiredMixin, UpdateView):
     model = Event
     fields = ['description', 'people']
 
@@ -229,7 +228,7 @@ class EventUpdate(UpdateView):
         return reverse_lazy('core:one_event', args=([self.object.id]))
 
 
-class EventDelete(DeleteView):
+class EventDelete(LoginRequiredMixin, DeleteView):
     model = Event
     success_url = reverse_lazy("core:events")
 

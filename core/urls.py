@@ -25,7 +25,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login', MyLoginView.as_view(), name='login'),
     path('register', MySignupView.as_view(), name='register'),
-    path('logout', LogoutView.as_view(), {'success_url': '/'}),
+    path('logout', LogoutView.as_view(), name='logout'),
     path('research', views.research, name='research'),
     path('search_person', PersonSearch.as_view(), name='search_person'),
     path('calendar/<int:year>/<int:month>', views
