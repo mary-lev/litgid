@@ -3,6 +3,7 @@ import random
 
 import markdown
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count, Q
 from django.forms import modelformset_factory
@@ -57,6 +58,7 @@ def new_calendar(request, year, month):
                    'all_years': all_years})
 
 
+@login_required
 def edit_persons(request, event_id):
     PersonFormSet = modelformset_factory(
         Person,
@@ -79,6 +81,7 @@ def edit_persons(request, event_id):
         'event': event})
 
 
+@login_required
 def update_event_with_person(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
@@ -101,6 +104,7 @@ def update_event_with_person(request, event_id):
         'event': event})
 
 
+@login_required
 def detach_person_from_event(request, event_id, person_id):
     event = Event.objects.get(id=event_id)
     person = Person.objects.get(id=person_id)
