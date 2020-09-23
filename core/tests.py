@@ -1,5 +1,5 @@
 from django.test import TestCase
-from models import Person
+from .models import Person
 
 
 class PersonTestCase(TestCase):
@@ -21,3 +21,7 @@ class PersonTestCase(TestCase):
         person_two = Person.objects.get(family='Львов-Курачевский')
         self.assertEqual(person_one.name, 'Сергей')
         self.assertEqual(person_two.name, 'Елпидифор')
+
+    def test_person_has_family(self):
+        person_one = Person.objects.get(name='Елпидифор')
+        self.assertEqual(person_one.family, 'Львов-Курачевский')

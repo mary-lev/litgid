@@ -2,7 +2,9 @@ import pathlib
 import os
 import django_heroku
 
-#from .secret_setting import SECRET_KEY
+from .secret_setting import SECRET_KEY
+import sys
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve(strict=True).parent.parent
@@ -84,11 +86,17 @@ DATABASES = {'default':
                   "PASSWORD":
                       '5318dc42f30f24c0cd558200d99e66ac33cc906c61eb8465cd9ee69cabca0a9f',
                   'HOST': "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com",
-                  'PORT': "5432"},
+                  'PORT': "5432",
+                  },
              'second':
                  {'ENGINE': 'django.db.backends.sqlite3',
-                  'NAME': BASE_DIR / 'db.sqlite3'}}
+                  'NAME': BASE_DIR / 'db.sqlite3'}
+            }
 
+
+#Covers regular testing and django-coverage
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -108,6 +116,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
