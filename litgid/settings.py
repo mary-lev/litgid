@@ -15,7 +15,7 @@ BASE_DIR = pathlib.Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -96,9 +96,8 @@ DATABASES = {'default':
 
 
 #Covers regular testing and django-coverage
-if DEBUG:
-    if 'test' in sys.argv or 'test_coverage' in sys.argv:
-        DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+#if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    #DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
