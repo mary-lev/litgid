@@ -16,7 +16,7 @@ class PersonTestCase(TestCase):
             family='Львов-Курачевский')
 
     def test_person_has_name(self):
-        """Тестируем соответствие имени"""
+        """Тестируем соответствие имени."""
         person_one = Person.objects.get(family='Сергеев-Ценский Второй')
         person_two = Person.objects.get(family='Львов-Курачевский')
         self.assertEqual(person_one.name, 'Сергей')
