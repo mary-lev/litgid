@@ -1,6 +1,6 @@
 import pathlib
 import os
-#Covers regular testing and django-coverage
+import sys
 import django_heroku
 
 
