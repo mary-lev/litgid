@@ -4,7 +4,7 @@ import sys
 import django_heroku
 
 
-#from .secret_setting import SECRET_KEY
+from .secret import *
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,12 +82,17 @@ REST_FRAMEWORK = {
 
 DATABASES = {'default':
                  {'ENGINE': 'django.db.backends.postgresql',
+                  'NAME': DATABASE_NAME,
+                  "USER": DATABASE_USER,
+                  "PASSWORD": DATABASE_PASSWORD,
+                  'HOST': DATABASE_HOST,
                   'PORT': "5432",
                   },
              'second':
                  {'ENGINE': 'django.db.backends.sqlite3',
                   'NAME': BASE_DIR / 'db.sqlite3'}
             }
+
 
 #Covers regular testing and django-coverage
 #if 'test' in sys.argv or 'test_coverage' in sys.argv:
