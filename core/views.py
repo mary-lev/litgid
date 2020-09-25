@@ -1,5 +1,6 @@
 import os
 import random
+import logging
 
 import markdown
 from django.contrib.auth.views import LoginView
@@ -23,6 +24,9 @@ from .serializers import EventSerializer, PlaceSerializer
 from .utils import FoliumMap
 
 
+logger = logging.getLogger(__name__)
+
+
 def custom_handler404(request, exception):
     return render(request, '404.html', status=404)
 
@@ -33,6 +37,7 @@ def custom_handler500(request):
 
 def index(request):
     index_cards = 3
+    logger.info('test logger')
     cards = random.sample(list(Event.objects.all()), index_cards)
     return render(request, 'core/index.html', {'cards': cards})
 
