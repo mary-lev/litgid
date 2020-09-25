@@ -3,6 +3,8 @@ import os
 import sys
 import django_heroku
 
+
+# local vs production/heroku
 try:
     from .secret import *
     DATABASES = {'default':
