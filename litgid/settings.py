@@ -3,8 +3,24 @@ import os
 import sys
 import django_heroku
 
-
-#from .secret import *
+try:
+    from .secret import *
+    DATABASES = {'default':
+                 {'ENGINE': 'django.db.backends.postgresql',
+                  'NAME': DATABASE_NAME,
+                  "USER": DATABASE_USER,
+                  "PASSWORD": DATABASE_PASSWORD,
+                  'HOST': DATABASE_HOST,
+                  'PORT': "5432",
+                  },
+            }
+except ImportError as e:
+    DATABASES = {
+    'default':
+            {'ENGINE': 'django.db.backends.postgresql',
+            'PORT': "5432",
+            }
+    }
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,23 +91,6 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {'default':
-                 {'ENGINE': 'django.db.backends.postgresql',
-                  'NAME': DATABASE_NAME,
-                  "USER": DATABASE_USER,
-                  "PASSWORD": DATABASE_PASSWORD,
-                  'HOST': DATABASE_HOST,
-                  'PORT': "5432",
-                  },
-             'second':
-                 {'ENGINE': 'django.db.backends.sqlite3',
-                  'NAME': BASE_DIR / 'db.sqlite3'}
-            }
 
 
 #Covers regular testing and django-coverage
