@@ -4,7 +4,7 @@ import sys
 import django_heroku
 
 
-from .secret import *
+#from .secret import *
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
