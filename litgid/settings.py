@@ -16,7 +16,7 @@ try:
                   'PORT': "5432",
                   },
             }
-except ImportError as e:
+except ImportError:
     DATABASES = {
     'default':
             {'ENGINE': 'django.db.backends.postgresql',
@@ -96,8 +96,8 @@ REST_FRAMEWORK = {
 
 
 #Covers regular testing and django-coverage
-#if 'test' in sys.argv or 'test_coverage' in sys.argv:
-    #DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
+"""if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    #DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3' """
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -116,9 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# Logging
-
 
 
 # Internationalization

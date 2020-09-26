@@ -31,7 +31,6 @@ class LoginForm(AuthenticationForm):
 
         self.helper.form_class = 'form-signin pt-5'
         self.helper.label_class = 'text-muted'
-        #self.helper.field_class = 'form-control'
 
 
 class RegisterForm(UserCreationForm):
@@ -42,7 +41,7 @@ class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        for fieldname in ['username', 'password1', 'password2',]:
+        for fieldname in ['username', 'password1', 'password2', ]:
             self.fields[fieldname].help_text = None
 
         self.fields['username'].label = 'Логин'

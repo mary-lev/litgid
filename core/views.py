@@ -1,6 +1,5 @@
 import os
 import random
-import logging
 
 import markdown
 from django.contrib.auth.views import LoginView
@@ -39,6 +38,7 @@ def index(request):
 
 
 def research(request):
+    """Конвертируем Readme.md в страницу сайта."""
     file_path = os.path.join(BASE_DIR, 'Readme.md')
     with open(file_path, encoding='utf-8') as file:
         text = file.read()
@@ -61,6 +61,7 @@ def new_calendar(request, year, month):
 
 @login_required
 def edit_persons(request, event_id):
+    """Редактируем всех персонажей, привязанных к одному событию."""
     PersonFormSet = modelformset_factory(
         Person,
         fields=['name', 'second_name', 'family', 'pseudonym'],
@@ -84,6 +85,7 @@ def edit_persons(request, event_id):
 
 @login_required
 def update_event_with_person(request, event_id):
+    """Добавляем к событию нового или уже существующего персонажа."""
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
         form = PersonForm(request.POST)
@@ -107,6 +109,7 @@ def update_event_with_person(request, event_id):
 
 @login_required
 def detach_person_from_event(request, event_id, person_id):
+    """Удаляем привязку персонажа к событию без удаления персонажа из базы."""
     event = Event.objects.get(id=event_id)
     person = Person.objects.get(id=person_id)
     if request.method == 'POST':
@@ -163,7 +166,7 @@ class EventListView(ListView):
 
 class PlaceListView(ListView):
 
-    '''Sort places by event number'''
+    """Sort places by event number."""
     paginate_by = 25
     model = Place
     queryset = Place.objects.annotate(
@@ -172,7 +175,7 @@ class PlaceListView(ListView):
 
 class PlaceAlphabetListView(ListView):
 
-    '''Sort places by place name'''
+    """Sort places by place name."""
     paginate_by = 25
     model = Place
     queryset = Place.objects.order_by('name')
@@ -180,7 +183,7 @@ class PlaceAlphabetListView(ListView):
 
 class PersonListView(ListView):
 
-    '''Sort persons by activity in events'''
+    """Sort persons by activity in events."""
     paginate_by = 25
     model = Person
     queryset = Person.objects.annotate(
@@ -189,13 +192,14 @@ class PersonListView(ListView):
 
 class NormalPersonListView(ListView):
 
-    '''Sort persons by family and name'''
+    """Sort persons by family and name."""
     model = Person
     paginate_by = 25
     queryset = Person.objects.all().order_by('family', 'name')
 
 
 class PersonSearch(PersonListView):
+    """Поисковая форма в навигации. Ищет пока только по персонажам."""
     def get_queryset(self):
         query = self.request.GET.get('search', '')
         return Person.objects.filter(
@@ -203,6 +207,7 @@ class PersonSearch(PersonListView):
 
 
 class PersonUpdate(LoginRequiredMixin, UpdateView):
+    """Редактируем все имена одного персонажа."""
     model = Person
     fields = ['name', 'second_name', 'family', 'pseudonym']
 
@@ -221,11 +226,13 @@ class PersonUpdate(LoginRequiredMixin, UpdateView):
 
 
 class PersonDelete(LoginRequiredMixin, DeleteView):
+    """Удаляем персонажа из базы."""
     model = Person
     success_url = reverse_lazy("core:persons")
 
 
 class EventUpdate(LoginRequiredMixin, UpdateView):
+    """Редактируем описание конкретного события."""
     model = Event
     fields = ['description', 'people']
 
@@ -234,11 +241,13 @@ class EventUpdate(LoginRequiredMixin, UpdateView):
 
 
 class EventDelete(LoginRequiredMixin, DeleteView):
+    """Удаляем событие из базы."""
     model = Event
     success_url = reverse_lazy("core:events")
 
 
 class FoliumView(TemplateView):
+    """Отображаем все адреса на карте города."""
     template_name = 'core/map.html'
 
     def get_context_data(self, **kwargs):
