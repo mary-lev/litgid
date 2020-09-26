@@ -199,6 +199,7 @@ class NormalPersonListView(ListView):
 
 
 class PersonSearch(PersonListView):
+
     """Поисковая форма в навигации. Ищет пока только по персонажам."""
     def get_queryset(self):
         query = self.request.GET.get('search', '')
@@ -207,6 +208,7 @@ class PersonSearch(PersonListView):
 
 
 class PersonUpdate(LoginRequiredMixin, UpdateView):
+
     """Редактируем все имена одного персонажа."""
     model = Person
     fields = ['name', 'second_name', 'family', 'pseudonym']
@@ -226,12 +228,14 @@ class PersonUpdate(LoginRequiredMixin, UpdateView):
 
 
 class PersonDelete(LoginRequiredMixin, DeleteView):
+
     """Удаляем персонажа из базы."""
     model = Person
     success_url = reverse_lazy("core:persons")
 
 
 class EventUpdate(LoginRequiredMixin, UpdateView):
+
     """Редактируем описание конкретного события."""
     model = Event
     fields = ['description', 'people']
@@ -241,12 +245,14 @@ class EventUpdate(LoginRequiredMixin, UpdateView):
 
 
 class EventDelete(LoginRequiredMixin, DeleteView):
+
     """Удаляем событие из базы."""
     model = Event
     success_url = reverse_lazy("core:events")
 
 
 class FoliumView(TemplateView):
+
     """Отображаем все адреса на карте города."""
     template_name = 'core/map.html'
 

@@ -1,7 +1,5 @@
-"""
-Все переписать на базе класса TextCalendar,
-чтобы убрать отсюда форматирование таблицы для шаблона.
-"""
+"""Все переписать на базе класса TextCalendar,
+чтобы убрать отсюда форматирование таблицы для шаблона."""
 from calendar import HTMLCalendar, day_abbr
 from itertools import groupby
 from django.utils.html import conditional_escape as esc
