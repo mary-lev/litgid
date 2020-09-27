@@ -8,7 +8,7 @@ from .views import EventListView, PlaceListView, \
     PersonListView, NormalPersonListView, PersonDetailView, \
     PersonSearch, FoliumView, EventDelete, PlaceAlphabetListView
 from .views import PersonUpdate, PersonDelete, EventCreateView, EventUpdate
-from .views import MyLoginView, MySignupView
+from .views import MyLoginView, MySignupView, Graph
 
 
 handler404 = views.custom_handler404
@@ -54,6 +54,7 @@ urlpatterns = [
     path('edit_persons/<int:event_id>/', views.edit_persons,
          name='edit_persons'),
     path('map', FoliumView.as_view(), name='map'),
+    path('graph', Graph.as_view(), name='graph'),
     path('api/', include(router.urls)),
     path('api-auth/', include(
         'rest_framework.urls', namespace='rest_framework')),

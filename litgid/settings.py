@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
     'crispy_forms',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,9 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+#plotly_dash
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 #Covers regular testing and django-coverage

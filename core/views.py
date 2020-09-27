@@ -1,7 +1,9 @@
 import os
 import random
-
 import markdown
+import plotly.offline as opy
+import plotly.graph_objs as go
+
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -21,6 +23,7 @@ from .models import Event, Place, Adress, Person
 from .serializers import AdressSerializer, PersonSerializer
 from .serializers import EventSerializer, PlaceSerializer
 from .utils import FoliumMap
+from .net import trace1
 
 
 def custom_handler404(request, exception):
@@ -126,6 +129,21 @@ def detach_person_from_event(request, event_id, person_id):
 
 
 # Class-based views
+
+class Graph(TemplateView):
+    template_name = 'graph.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Graph, self).get_context_data(**kwargs)
+
+        data=go.Data([trace1])
+        layout=go.Layout(title="Тут будет граф", xaxis={'title':'x1'}, yaxis={'title':'x2'})
+        figure=go.Figure(data=data,layout=layout)
+        div = opy.plot(figure, auto_open=False, output_type='div')
+
+        context['graph'] = div
+
+        return context
 
 
 class MySignupView(CreateView):
