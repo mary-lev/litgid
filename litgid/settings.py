@@ -16,6 +16,9 @@ try:
                   'PORT': "5432",
                   },
             }
+    #Covers regular testing and django-coverage
+    if 'test' in sys.argv or 'test_coverage' in sys.argv:
+        DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 except ImportError:
     DATABASES = {
     'default':
@@ -98,10 +101,6 @@ REST_FRAMEWORK = {
 #plotly_dash
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-
-#Covers regular testing and django-coverage
-"""if 'test' in sys.argv or 'test_coverage' in sys.argv:
-    #DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3' """
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

@@ -137,7 +137,7 @@ class Graph(TemplateView):
         context = super(Graph, self).get_context_data(**kwargs)
 
         layout=go.Layout(
-            title="Тут будет граф", 
+            title="Тут будет граф",
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
             )
