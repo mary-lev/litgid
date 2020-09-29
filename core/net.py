@@ -1,4 +1,5 @@
 import plotly.graph_objs as go
+import plotly.offline as opy
 import networkx as nx
 import random
 
@@ -7,7 +8,7 @@ G = nx.Graph()
 
 G.add_edge('First', 'Second', weight=10)
 G.add_edge('Second', 'Third', weight=5)
-G.add_edge('Third', 'Fourth', weight=1)
+G.add_edge('Third', 'Fourth', weight=15)
 G.add_edge('Fourth', 'First', weight=1)
 G.add_edge('One', 'Two', weight=2)
 
@@ -110,3 +111,5 @@ layout = go.Layout(
         , )
 
 data = [edge_trace, node_trace]
+figure=go.Figure(data=data,layout=layout)
+net_div = opy.plot(figure, auto_open=False, output_type='div')

@@ -1,8 +1,6 @@
 import os
 import random
 import markdown
-import plotly.offline as opy
-import plotly.graph_objs as go
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
@@ -23,7 +21,7 @@ from .models import Event, Place, Adress, Person
 from .serializers import AdressSerializer, PersonSerializer
 from .serializers import EventSerializer, PlaceSerializer
 from .utils import FoliumMap
-from .net import data, layout
+from .net import net_div
 
 
 def custom_handler404(request, exception):
@@ -135,12 +133,7 @@ class Graph(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Graph, self).get_context_data(**kwargs)
-
-        figure=go.Figure(data=data,layout=layout)
-        div = opy.plot(figure, auto_open=False, output_type='div')
-
-        context['graph'] = div
-
+        context['graph'] = net_div
         return context
 
 
