@@ -3,14 +3,23 @@ import plotly.offline as opy
 import networkx as nx
 import random
 
+from .models import Event, Person
+
 #G = nx.random_geometric_graph(200, 0.125)
 G = nx.Graph()
 
-G.add_edge('First', 'Second', weight=10)
-G.add_edge('Second', 'Third', weight=5)
-G.add_edge('Third', 'Fourth', weight=15)
-G.add_edge('Fourth', 'First', weight=1)
-G.add_edge('One', 'Two', weight=2)
+for event in Event.objects.all()[:50]:
+    for person in event.people.all():
+        for other_person in event.people.all():
+            if other_person != person:
+                if G.has_edge(person.family, other_person.family):
+                    G[person.family][other_person.family]['weight'] += 1
+                elif G.has_edge(other_person.family, person.family):
+                    G[other_person.family, person.family]['weight'] +=1
+                else:
+                    G.add_edge(person.family, other_person.family, weight=1)
+
+G.add_edge('Кушнер', 'Соснора', weight=10)
 
 edge_weights = nx.get_edge_attributes(G,'weight')
 
