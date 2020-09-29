@@ -5,11 +5,20 @@ import random
 #G = nx.random_geometric_graph(200, 0.125)
 G = nx.Graph()
 
-G.add_edge('First', 'Second', weight=1)
-G.add_edge('Second', 'Third', weight=1)
+G.add_edge('First', 'Second', weight=10)
+G.add_edge('Second', 'Third', weight=5)
 G.add_edge('Third', 'Fourth', weight=1)
 G.add_edge('Fourth', 'First', weight=1)
 G.add_edge('One', 'Two', weight=2)
+
+edge_weights = nx.get_edge_attributes(G,'weight')
+
+labels = [] # names of the nodes to plot
+group = [] # id of the communities
+group_cnt = 0
+
+for node in G.nodes():
+    labels.append(node)
 
 layt = nx.spring_layout(G, dim=2) # Generates the layout of the graph
 Xn = [layt[k][0] for k in list(layt.keys())]  # x-coordinates of nodes
@@ -23,13 +32,22 @@ for e in G.edges():
     Ye += [layt[e[0]][1], layt[e[1]][1], None]
     ax = (layt[e[0]][0]+layt[e[1]][0])/2
     ay = (layt[e[0]][1]+layt[e[1]][1])/2
-    plot_weights.append((random.randrange(3), ax, ay))
+    plot_weights.append((edge_weights[(e[0], e[1])], ax, ay))
 
-"""edge_trace = go.Scatter(
-    x=edge_x, y=edge_y,
-    line=dict(width=0.5, color='#888'),
-    hoverinfo='none',
-    mode='lines')"""
+annotations_list = [
+                    dict(
+                        x=plot_weight[1],
+                        y=plot_weight[2],
+                        xref='x',
+                        yref='y',
+                        text=plot_weight[0],
+                        showarrow=True,
+                        arrowhead=7,
+                        ax=plot_weight[1],
+                        ay=plot_weight[2]
+                        ) 
+                    for plot_weight in plot_weights
+                    ]
 
 edge_trace = go.Scatter(
     x=Xe,
@@ -38,35 +56,6 @@ edge_trace = go.Scatter(
     line=dict(color='rgb(90, 90, 90)', width=1),
     hoverinfo='none'
     )
-
-"""node_x = []
-node_y = []
-for node in G.nodes():
-    x, y = G.nodes[node]['pos']
-    node_x.append(x)
-    node_y.append(y)"""
-
-"""node_trace = go.Scatter(
-    x=node_x, y=node_y,
-    mode='markers',
-    hoverinfo='text',
-    marker=dict(
-        showscale=True,
-        # colorscale options
-        #'Greys' | 'YlGnBu' | 'Greens' | 'YlOrRd' | 'Bluered' | 'RdBu' |
-        #'Reds' | 'Blues' | 'Picnic' | 'Rainbow' | 'Portland' | 'Jet' |
-        #'Hot' | 'Blackbody' | 'Earth' | 'Electric' | 'Viridis' |
-        colorscale='YlGnBu',
-        reversescale=True,
-        color=[],
-        size=10,
-        colorbar=dict(
-            thickness=15,
-            title='Node Connections',
-            xanchor='left',
-            titleside='right'
-        ),
-        line_width=2))"""
 
 node_trace = go.Scatter(
     x=Xn,
@@ -79,10 +68,45 @@ node_trace = go.Scatter(
         colorscale='Viridis',
         line=dict(color='rgb(255,255,255)', width=1)
         ),
-    text="test",
+    text=labels,
     textposition='top center',
     hoverinfo='none'
     )
 
+xaxis = dict(
+    backgroundcolor="rgb(200, 200, 230)",
+    #gridcolor="rgb(255, 255, 255)",
+    showbackground=True,
+    showgrid=False,
+    zerolinecolor="rgb(255, 255, 255)"
+    )
+yaxis = dict(
+    backgroundcolor="rgb(230, 200,230)",
+    #gridcolor="rgb(255, 255, 255)",
+    showbackground=True,
+    showgrid=False,
+    zerolinecolor="rgb(255, 255, 255)"
+    )
+
+"""layout=go.Layout(
+            title=,
+            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
+            )"""
+
+layout = go.Layout(
+        title="Тут будет граф",
+        showlegend=False,
+        plot_bgcolor="rgb(230, 230, 200)",
+        scene=dict(
+            xaxis=dict(xaxis),
+            yaxis=dict(yaxis)
+        ),
+        margin=dict(
+            t=100
+        ),
+        hovermode='closest',
+        annotations=annotations_list
+        , )
 
 data = [edge_trace, node_trace]

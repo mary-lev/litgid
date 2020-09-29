@@ -23,7 +23,7 @@ from .models import Event, Place, Adress, Person
 from .serializers import AdressSerializer, PersonSerializer
 from .serializers import EventSerializer, PlaceSerializer
 from .utils import FoliumMap
-from .net import data
+from .net import data, layout
 
 
 def custom_handler404(request, exception):
@@ -136,11 +136,6 @@ class Graph(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Graph, self).get_context_data(**kwargs)
 
-        layout=go.Layout(
-            title="Тут будет граф",
-            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
-            )
         figure=go.Figure(data=data,layout=layout)
         div = opy.plot(figure, auto_open=False, output_type='div')
 
