@@ -5,17 +5,15 @@ import random
 
 from .models import Event, Person
 
-#G = nx.random_geometric_graph(200, 0.125)
+
 G = nx.Graph()
 
-for event in Event.objects.all()[:50]:
-    for person in event.people.all():
+for person in Person.objects.all()[:30]:
+    for event in Event.objects.filter(people__id=person.id):
         for other_person in event.people.all():
             if other_person != person:
                 if G.has_edge(person.family, other_person.family):
                     G[person.family][other_person.family]['weight'] += 1
-                elif G.has_edge(other_person.family, person.family):
-                    G[other_person.family, person.family]['weight'] +=1
                 else:
                     G.add_edge(person.family, other_person.family, weight=1)
 
@@ -24,8 +22,6 @@ G.add_edge('Кушнер', 'Соснора', weight=10)
 edge_weights = nx.get_edge_attributes(G,'weight')
 
 labels = [] # names of the nodes to plot
-group = [] # id of the communities
-group_cnt = 0
 
 for node in G.nodes():
     labels.append(node)
@@ -98,11 +94,6 @@ yaxis = dict(
     zerolinecolor="rgb(255, 255, 255)"
     )
 
-"""layout=go.Layout(
-            title=,
-            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
-            )"""
 
 layout = go.Layout(
         title="Тут будет граф",
