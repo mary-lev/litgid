@@ -3,17 +3,23 @@ import plotly.offline as opy
 import networkx as nx
 import random
 
+from django.db.models import Count
+
 from .models import Event, Person
 
 
 G = nx.Graph()
 
-for person in Person.objects.all()[:30]:
-    for event in Event.objects.filter(people__id=person.id):
+#max_persons = Person.objects.annotate(num_events=Count('event')).filter(num_events__gt=100)
+
+for event in Event.objects.all()[:50]:
+    for person in event.people.all():
         for other_person in event.people.all():
             if other_person != person:
                 if G.has_edge(person.family, other_person.family):
                     G[person.family][other_person.family]['weight'] += 1
+                elif G.has_edge(other_person.family, person.family):
+                    G[other_person.family][person.family]['weight'] += 1
                 else:
                     G.add_edge(person.family, other_person.family, weight=1)
 

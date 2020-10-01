@@ -209,11 +209,14 @@ class NormalPersonListView(ListView):
 
 class PersonSearch(PersonListView):
 
-    """Поисковая форма в навигации. Ищет пока только по персонажам."""
+    """Поисковая форма в навигации. Ищет пока только по персонажам и описанию события."""
     def get_queryset(self):
         query = self.request.GET.get('search', '')
-        return Person.objects.filter(
+        result = Person.objects.filter(
             Q(family__icontains=query) | Q(name__icontains=query))
+        if not result:
+            result = Event.objects.filter(Q(description__icontains=query))
+        return result
 
 
 class PersonUpdate(LoginRequiredMixin, UpdateView):

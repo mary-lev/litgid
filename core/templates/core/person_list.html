@@ -7,8 +7,12 @@
 <small><a href='{% url "core:persons_order" %}'>По фамилии</a></small> | <small><a href='{% url "core:persons" %}'>По активности</a></small>
 
 <ul>
-	{% for person in object_list %}
-	<li><a href="{% url 'core:one_person' person.id %}">{{ person.show_full_name }} ({{person.event.all.count}}) </a></li>
+	{% for object in object_list %}
+	{% if object.name %}
+	<li><a href="{% url 'core:one_person' object.id %}">{{ object.show_full_name }} ({{object.event.all.count}}) </a></li>
+	{% else %}
+	<li><a href="">{{ object.date|date:"DATE_FORMAT" }}</a></li>
+	{% endif %}
 	{% endfor %}
 </ul>
 
