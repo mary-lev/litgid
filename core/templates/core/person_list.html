@@ -8,9 +8,7 @@
 
 <ul>
 	{% for object in object_list %}
-	{% if object.name %}
-	<li><a href="{% url 'core:one_person' object.id %}">{{ object.show_full_name }} ({{object.event.all.count}}) </a></li>
-	{% elif object.family%}
+	{% if object.name or object.family %}
 	<li><a href="{% url 'core:one_person' object.id %}">{{ object.show_full_name }} ({{object.event.all.count}}) </a></li>
 	{% else %}
 	<li><a href="">{{ object.date|date:"DATE_FORMAT" }}</a></li>
