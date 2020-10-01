@@ -3,8 +3,6 @@ import plotly.offline as opy
 import networkx as nx
 import random
 
-from django.db.models import Count
-
 from .models import Event, Person
 
 
