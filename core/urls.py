@@ -30,6 +30,7 @@ urlpatterns = [
     path('search_person', PersonSearch.as_view(), name='search_person'),
     path('calendar/<int:year>/<int:month>', views
          .new_calendar, name='calendar'),
+    path('event_calendar/<int:year>/<int:month>', views.test_calendar, name='event_calendar'),
     path('event_create', EventCreateView.as_view(), name='event_create'),
     path('places', PlaceListView.as_view(), name='places'),
     path('places_alphabet', PlaceAlphabetListView

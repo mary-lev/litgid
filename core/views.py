@@ -16,6 +16,7 @@ from litgid.settings import BASE_DIR
 from rest_framework import viewsets
 
 from .events_calendar import EventCalendar
+from .event_calendar import Test_Calendar
 from .forms import PersonForm, LoginForm, RegisterForm
 from .models import Event, Place, Adress, Person
 from .serializers import AdressSerializer, PersonSerializer
@@ -58,6 +59,19 @@ def new_calendar(request, year, month):
                    'month': month,
                    'year': year,
                    'all_years': all_years})
+
+
+def test_calendar(request, year, month):
+    events = Event.objects.filter(
+        date__year=year, date__month=month)
+    calendar = Test_Calendar()
+    #calendar_current = calendar.formatmonth(theyear=year, themonth=month)
+    calendar_current = [week for week in calendar.monthdays2calendar(year, month)]
+    print(type(calendar_current))
+    return render(request, 'core/event_calendar.html', {
+        'calendar': calendar_current
+        })
+
 
 
 @login_required

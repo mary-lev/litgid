@@ -1,0 +1,47 @@
+{% extends 'page.html' %}
+
+{% block content %}
+
+<table class='table-primary'>
+	<tr><th colspan="7" class="display-4"><center>Месяц Год</center></th></tr>
+	<tr>
+		<th class="table-primary">Пн</th>
+		<th class="table-primary">Вт</th>
+		<th class="table-primary">Ср</th>
+		<th class="table-primary">Чт</th>
+		<th class="table-primary">Пт</th>
+		<th class="table-primary">Сб</th>
+		<th class="table-primary">Вс</th>
+	</tr>
+{% for week in calendar %}
+<tr>{% for day in week %}
+	<td class='noday'>{{ day }}</td>
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+{% endblock %}
+<center>
+
+ <a class="btn btn-primary" role="button" href="{% url 'core:calendar' calendar.previous_month.year calendar.previous_month.month %}" >  
+ {{ calendar.previous_month.name }} </a>
+
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{year}} 
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">  	
+  	{% for one_year in all_years %}
+    <a class="dropdown-item" href="{% url 'core:calendar' one_year 1 %}">{{one_year}}</a>
+    {% endfor %}
+
+  </div>
+  
+<a class="btn btn-primary" role="button" href="{% url 'core:calendar' calendar.next_month.year calendar.next_month.month %}" >  {{ calendar.next_month.name }} </a>
+
+</center>

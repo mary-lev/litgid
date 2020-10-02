@@ -10,7 +10,7 @@ G = nx.Graph()
 
 #max_persons = Person.objects.annotate(num_events=Count('event')).filter(num_events__gt=100)
 
-for event in Event.objects.all()[:50]:
+for event in Event.objects.all()[:10]:
     for person in event.people.all():
         for other_person in event.people.all():
             if other_person != person:
