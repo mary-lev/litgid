@@ -12,12 +12,15 @@ month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'М�
 
 class Test_Calendar(TextCalendar):
 
+    """Переопределяем метод для инициализации календаря с заданными месяцем и годом."""
     def __init__(self, year, month):
         super().__init__()
         self.year = year
         self.month = month
 
     def collect_events(self):
+
+        """Собираем события из базы к каждому дню месяца."""
         weeks = [week for week in self.monthdays2calendar(self.year, self.month)]
         weeks_with_events = list()
         for week in weeks:
