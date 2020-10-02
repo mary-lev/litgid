@@ -9,7 +9,14 @@ month_name = ['Январь', 'Февраль', 'Март', 'Апрель', 'М�
 
 
 class Test_Calendar(TextCalendar):
-    pass
+
+    def __init__(self, year, month):
+        super().__init__()
+        self.year = year
+        self.month = month
+
+    def collect_events(self):
+        return [week for week in self.monthdays2calendar(self.year, self.month)]
 
 
 class EventCalendar(HTMLCalendar):

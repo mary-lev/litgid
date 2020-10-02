@@ -3,7 +3,7 @@
 {% block content %}
 
 <table class='table-primary'>
-	<tr><th colspan="7" class="display-4"><center>Месяц Год</center></th></tr>
+	<tr><th colspan="7" class="display-4"><center>{{month}} {{year}}</center></th></tr>
 	<tr>
 		<th class="table-primary">Пн</th>
 		<th class="table-primary">Вт</th>
@@ -15,7 +15,7 @@
 	</tr>
 {% for week in calendar %}
 <tr>{% for day in week %}
-	<td class='noday'>{{ day }}</td>
+	<td class='noday'>{% if day.0 %}{{ day.0 }}{% endif %}</td>
 	{% endfor %}
 </tr>
 {% endfor %}
