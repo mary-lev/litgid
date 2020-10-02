@@ -15,7 +15,7 @@
 	</tr>
 {% for week in calendar %}
 <tr>{% for day in week %}
-	<td class='noday'>{% if day.0 %}{{ day.0 }}{% endif %}</td>
+	<td class='noday'>{% if day.0.0 %}{{ day.0.0 }}/{{ day.1 }}{% endif %}</td>
 	{% endfor %}
 </tr>
 {% endfor %}

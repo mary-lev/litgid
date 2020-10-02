@@ -62,16 +62,12 @@ def new_calendar(request, year, month):
 
 
 def test_calendar(request, year, month):
-    events = Event.objects.filter(
-        date__year=year, date__month=month)
     calendar = Test_Calendar(year, month)
-    #calendar_current = calendar.formatmonth(theyear=year, themonth=month)
     calendar_current = calendar.collect_events()
-    print(type(calendar_current))
     return render(request, 'core/event_calendar.html', {
         'calendar': calendar_current,
         'year': year,
-        'month': month_name[month+1]
+        'month': month_name[month-1]
         })
 
 
