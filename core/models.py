@@ -13,14 +13,15 @@ class Person(models.Model):
                                  verbose_name='Псевдоним')
 
     class Meta:
-        verbose_name = "Person"
+        verbose_name = "Персонаж"
+        verbose_name_plural = "Персонажи"
         app_label = 'core'
         unique_together = (('name', 'family'),)
         ordering = ['family', 'name']
 
     def __str__(self):
         """Save from None in self.name."""
-        return self.name if self.name else ''
+        return f'{self.name} {self.second_name} {self.family}'
 
     def get_absolute_url(self):
         return reverse('core:one_person', args=[self.id])
@@ -46,10 +47,11 @@ class Adress(models.Model):
 
     class Meta:
         app_label = 'core'
-        verbose_name = 'Adress'
+        verbose_name = 'Адрес'
+        verbose_name_plural = "Адреса"
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 
 class Place(models.Model):
@@ -57,10 +59,11 @@ class Place(models.Model):
 
     class Meta:
         app_label = 'core'
-        verbose_name = 'Place'
+        verbose_name = 'Место'
+        verbose_name_plural = "Места"
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
     def show_adresses(self):
         events = Event.objects.filter(place=self).values_list(
@@ -80,11 +83,12 @@ class Event(models.Model):
 
     class Meta:
         app_label = 'core'
-        verbose_name = 'Event'
+        verbose_name = 'Событие'
+        verbose_name_plural = "События"
         ordering = ['date']
 
     def __str__(self):
-        return self.description
+        return f'{self.description}'
 
     def get_absolute_url(self):
         return reverse('core:one_event', args=[self.id])
