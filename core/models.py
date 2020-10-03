@@ -27,15 +27,20 @@ class Person(models.Model):
         return reverse('core:one_person', args=[self.id])
 
     def show_full_name(self):
+        if self.name:
+            first_name = self.name
+        else:
+            first_name = ''
         if self.second_name:
             second_name = self.second_name
         else:
             second_name = ''
+        if self.family:
+            family = self.family
+        else:
+            family = ''
 
-        return '{0} {1} {2}'.format(
-            self.name,
-            second_name,
-            self.family)
+        return '{0} {1} {2}'.format(first_name, second_name, family)
 
 
 class Adress(models.Model):
