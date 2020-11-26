@@ -4,8 +4,8 @@ import datetime
 import pytz
 
 class TestPerson(TestCase):
-
     """Тесты для модели Person."""
+
     @classmethod
     def setUpTestData(cls):
         Person.objects.create(
@@ -33,8 +33,8 @@ class TestPerson(TestCase):
 
 
 class TestAdress(TestCase):
-
     """Тесты для модели Address."""
+
     @classmethod
     def setUpTestData(cls):
         Adress.objects.create(name='ул. Октябрьская, д. 31')
@@ -50,8 +50,8 @@ class TestAdress(TestCase):
 
 
 class TestPlace(TestCase):
-
     """Тесты для модели Place."""
+
     @classmethod
     def setUpTestData(cls):
         place = Place.objects.create(name='Эрарта')
@@ -75,8 +75,8 @@ class TestPlace(TestCase):
         self.assertEqual(event.adress, address)
 
 class TestEvent(object):
-
     """Тесты для модели Event."""
+    
     def setUpTestData(cls):
         pass
 
