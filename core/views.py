@@ -22,7 +22,7 @@ from .models import Event, Place, Adress, Person
 from .serializers import AdressSerializer, PersonSerializer
 from .serializers import EventSerializer, PlaceSerializer
 from .utils import FoliumMap
-from .net import net_div
+#from .net import net_div
 
 
 def custom_handler404(request, exception):
