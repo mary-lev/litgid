@@ -34,7 +34,7 @@ def custom_handler500(request):
 
 
 def index(request):
-    """На главной отображаем три случайные события"""
+    """На главной отображаем три случайные события."""
     index_cards = 3
     cards = random.sample(list(Event.objects.all()), index_cards)
     return render(request, 'core/index.html', {'cards': cards})
