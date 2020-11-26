@@ -34,6 +34,7 @@ def custom_handler500(request):
 
 
 def index(request):
+    """На главной отображаем три случайные события"""
     index_cards = 3
     cards = random.sample(list(Event.objects.all()), index_cards)
     return render(request, 'core/index.html', {'cards': cards})
@@ -67,9 +68,8 @@ def test_calendar(request, year, month):
     return render(request, 'core/event_calendar.html', {
         'calendar': calendar_current,
         'year': year,
-        'month': month_name[month-1]
-        })
-
+        'month': month_name[month - 1]
+    })
 
 
 @login_required
@@ -186,7 +186,6 @@ class EventListView(ListView):
 
 
 class PlaceListView(ListView):
-
     """Sort places by event number."""
     paginate_by = 25
     model = Place
@@ -195,7 +194,6 @@ class PlaceListView(ListView):
 
 
 class PlaceAlphabetListView(ListView):
-
     """Sort places by place name."""
     paginate_by = 25
     model = Place
@@ -203,7 +201,6 @@ class PlaceAlphabetListView(ListView):
 
 
 class PersonListView(ListView):
-
     """Sort persons by activity in events."""
     paginate_by = 25
     model = Person
@@ -212,7 +209,6 @@ class PersonListView(ListView):
 
 
 class NormalPersonListView(ListView):
-
     """Sort persons by family and name."""
     model = Person
     paginate_by = 25
@@ -220,8 +216,8 @@ class NormalPersonListView(ListView):
 
 
 class PersonSearch(PersonListView):
-
     """Поисковая форма в навигации. Ищет пока только по персонажам и описанию события."""
+
     def get_queryset(self):
         query = self.request.GET.get('search', '')
         result = Person.objects.filter(
@@ -232,7 +228,6 @@ class PersonSearch(PersonListView):
 
 
 class PersonUpdate(LoginRequiredMixin, UpdateView):
-
     """Редактируем все имена одного персонажа."""
     model = Person
     fields = ['name', 'second_name', 'family', 'pseudonym']
@@ -252,14 +247,12 @@ class PersonUpdate(LoginRequiredMixin, UpdateView):
 
 
 class PersonDelete(LoginRequiredMixin, DeleteView):
-
     """Удаляем персонажа из базы."""
     model = Person
     success_url = reverse_lazy("core:persons")
 
 
 class EventUpdate(LoginRequiredMixin, UpdateView):
-
     """Редактируем описание конкретного события."""
     model = Event
     fields = ['description', 'people']
@@ -269,14 +262,12 @@ class EventUpdate(LoginRequiredMixin, UpdateView):
 
 
 class EventDelete(LoginRequiredMixin, DeleteView):
-
     """Удаляем событие из базы."""
     model = Event
     success_url = reverse_lazy("core:events")
 
 
 class FoliumView(TemplateView):
-
     """Отображаем все адреса на карте города."""
     template_name = 'core/map.html'
 
