@@ -20,7 +20,14 @@ class TestPerson(TestCase):
 
     def test_str(self):
         person = Person.objects.get(id=1)
-        self.assertEqual(str(person), "{0} {1} {2}".format(person.name, person.second_name, person.family))
+        self.assertEqual(
+            str(person),
+            "{0} {1} {2}".format(
+                person.name,
+                person.second_name,
+                person.family
+            )
+        )
 
     def test_get_absolute_url(self):
         person = Person.objects.get(id=1)
@@ -76,7 +83,7 @@ class TestPlace(TestCase):
 
 class TestEvent(object):
     """Тесты для модели Event."""
-    
+
     def setUpTestData(cls):
         pass
 
