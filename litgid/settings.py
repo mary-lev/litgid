@@ -147,4 +147,6 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+TILES_API_KEY = os.getenv('TILES_API_KEY', '')
+
 django_heroku.settings(locals())
