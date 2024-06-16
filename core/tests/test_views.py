@@ -26,7 +26,7 @@ class TestIndex(TestCase):
 		self.assertEqual(core_views.index, response.resolver_match.func)
 		self.assertEqual(len(response.context['cards']), 3)
 		self.assertTemplateUsed(response, template_name='core/index.html')
-		self.assertContains(response, 'СПбЛитГид: 1999—2020')
+		self.assertContains(response, 'СПбЛитГид: 1999—2019')
 
 
 class TestResearch(TestCase):
