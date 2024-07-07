@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'bootstrap4',
-    'debug_toolbar',
+    # 'debug_toolbar',
     'django_extensions',
     'crispy_forms',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
