@@ -11,6 +11,16 @@ class Person(models.Model):
                               verbose_name='Фамилия')
     pseudonym = models.CharField(max_length=100, blank=True,
                                  verbose_name='Псевдоним')
+    viaf_id = models.CharField(max_length=50, blank=True, null=True,
+                               verbose_name='VIAF ID')
+    viaf_name = models.CharField(max_length=300, blank=True, null=True,
+                                    verbose_name='VIAF Name')
+    viaf_id_alternative = models.CharField(max_length=50, blank=True, null=True,
+                                          verbose_name='VIAF ID')
+    wikidata_id = models.CharField(max_length=50, blank=True, null=True,
+                                   verbose_name='Wikidata ID')
+    transliterated_name = models.CharField(max_length=300, blank=True, null=True,
+                                            verbose_name='Транслитерированное имя')
 
     class Meta:
         verbose_name = "Персонаж"
