@@ -13,13 +13,14 @@
           <a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">
               {{ object.viaf_id }}
           </a>
-          {% if viaf_data %}
-          <h5>VIAF Information</h5>
-          <pre>{{ viaf_data|json_script:"viaf-data" }}</pre>
-          {% endif %}
       {% else %}
           N/A
       {% endif %}
+  </p>
+  <p>{% if viaf_data %}
+    <h5>VIAF Information</h5>
+    <pre>{{ viaf_data|json_script:"viaf-data" }}</pre>
+    {% endif %}
   </p>
      <p>New VIAF: 
       {% if object.viaf_id_alternative %}
@@ -40,6 +41,12 @@
           N/A
       {% endif %}
   </p>
+
+      <!-- Display Wikidata data if available -->
+      {% if wikidata_data %}
+      <h5>Wikidata Information</h5>
+      <pre>{{ wikidata_data|json_script:"wikidata-data" }}</pre>
+    {% endif %}
   
   </div>
   <div class="card-body">
