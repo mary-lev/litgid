@@ -43,9 +43,9 @@
   </p>
 
       <!-- Display Wikidata data if available -->
-      {% if wikidata_data %}
+      {% if context %}
       <h5>Wikidata Information</h5>
-      <pre>{{ wikidata_data|json_script:"wikidata-data" }}</pre>
+      <pre>{{context }}</pre>
     {% endif %}
   
   </div>
