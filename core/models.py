@@ -53,20 +53,26 @@ class Person(models.Model):
 
         return '{0} {1} {2}'.format(first_name, second_name, family)
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     person = self.object
+
+    #     # Fetch VIAF data if the VIAF ID exists
+    #     if person.viaf_id:
+    #         viaf_data = self.fetch_viaf_data(person.viaf_id)
+    #         context['viaf_data'] = viaf_data
+
+    #     # Fetch Wikidata data if the Wikidata ID exists
+    #     if person.wikidata_id:
+    #         wikidata_data = self.fetch_wikidata_data(person.wikidata_id)
+    #         context['wikidata_data'] = wikidata_data
+
+    #     return context
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        person = self.object
-
-        # Fetch VIAF data if the VIAF ID exists
-        if person.viaf_id:
-            viaf_data = self.fetch_viaf_data(person.viaf_id)
-            context['viaf_data'] = viaf_data
-
-        # Fetch Wikidata data if the Wikidata ID exists
-        if person.wikidata_id:
-            wikidata_data = self.fetch_wikidata_data(person.wikidata_id)
-            context['wikidata_data'] = wikidata_data
-
+        context['viaf_data'] = {"test_key": "test_value"}  # Hardcoded test data
+        context['wikidata_data'] = {"test_key": "test_value"}  # Hardcoded test data
         return context
 
     def fetch_viaf_data(self, viaf_id):
