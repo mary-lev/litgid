@@ -10,6 +10,17 @@ class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = ['name', 'second_name', 'family', 'pseudonym', 'viaf_id', 'viaf_name', 'viaf_id_alternative', 'wikidata_id', 'transliterated_name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'second_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'family': forms.TextInput(attrs={'class': 'form-control'}),
+            'pseudonym': forms.TextInput(attrs={'class': 'form-control'}),
+            'viaf_id': forms.TextInput(attrs={'class': 'form-control'}),
+            'viaf_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'viaf_id_alternative': forms.TextInput(attrs={'class': 'form-control'}),
+            'wikidata_id': forms.TextInput(attrs={'class': 'form-control'}),
+            'transliterated_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 
 class PersonEventForm(forms.Form):

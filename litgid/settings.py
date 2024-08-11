@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # 'debug_toolbar',
     'django_extensions',
     'crispy_forms',
+    'crispy_bootstrap4',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'whitenoise.runserver_nostatic',
 ]
@@ -98,7 +99,7 @@ REST_FRAMEWORK = {
 
 # plotly_dash
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-# CRISPY_TEMPLATE_PACK = 'bootstrap'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
