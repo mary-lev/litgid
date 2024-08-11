@@ -184,7 +184,7 @@ class PersonDetailView(DetailView):
 
         # Fetch VIAF data if the VIAF ID exists
         if person.viaf_id:
-            print(person.viaf_id)
+            person.viaf_id = person.viaf_id.replace("'", "")
             viaf_data = self.fetch_viaf_data(person.viaf_id)
             context['viaf_data'] = viaf_data
 
@@ -196,6 +196,7 @@ class PersonDetailView(DetailView):
         return context
 
     def fetch_viaf_data(self, viaf_id):
+        viaf_id = viaf_id.replace("'", "")
         url = f'https://viaf.org/viaf/{viaf_id}/viaf.json'
         try:
             response = requests.get(url)
