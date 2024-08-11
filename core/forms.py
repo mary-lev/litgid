@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'second_name', 'family', 'pseudonym']
+        fields = ['name', 'second_name', 'family', 'pseudonym', 'viaf_id', 'viaf_name', 'viaf_id_alternative', 'wikidata_id', 'transliterated_name']
 
 
 class PersonEventForm(forms.Form):

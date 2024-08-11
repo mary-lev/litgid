@@ -3,23 +3,47 @@
 {% block content %}
 <div class="card">
   <div class="card-header">
-  	<h3>Редактирование персонажа</h3>
-		
+    <h3>Редактирование персонажа</h3>
   </div>
-<div class="card-body">
-	 <h5 class="card-title">Участники</h5>
-		<div id="form_set">
-
-   			<form action="" method="post">
-  				{% csrf_token %}
-    				{{ form }}
-	 			
-   
-    		<input type="submit" value="Submit" class="btn btn-primary">
-      
- 			</form>
+  <div class="card-body">
+    <h5 class="card-title">Участники</h5>
+    <div id="form_set">
+      <form action="" method="post">
+        {% csrf_token %}
+        
+        <!-- Display one field per line -->
+        <div class="form-group">
+          <label for="id_name">Имя</label>
+          {{ form.name|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          <label for="id_second_name">Отчество</label>
+          {{ form.second_name|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          <label for="id_family">Фамилия</label>
+          {{ form.family|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          <label for="id_pseudonym">Псевдоним</label>
+          {{ form.pseudonym|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          <label for="id_viaf_id">VIAF ID</label>
+          {{ form.viaf_id|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          <label for="id_wikidata_id">Wikidata ID</label>
+          {{ form.wikidata_id|as_crispy_field }}
+        </div>
+        <div class="form-group">
+          <label for="id_transliterated_name">Транслитерированное имя</label>
+          {{ form.transliterated_name|as_crispy_field }}
+        </div>
+        
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </form>
     </div>
- 		</div>
- </div>
-
+  </div>
+</div>
 {% endblock %}
