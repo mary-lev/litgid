@@ -13,6 +13,10 @@
           <a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">
               {{ object.viaf_id }}
           </a>
+          {% if viaf_data %}
+          <h5>VIAF Information</h5>
+          <pre>{{ viaf_data|json_script:"viaf-data" }}</pre>
+          {% endif %}
       {% else %}
           N/A
       {% endif %}
