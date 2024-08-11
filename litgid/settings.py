@@ -99,7 +99,8 @@ REST_FRAMEWORK = {
 
 # plotly_dash
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
