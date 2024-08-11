@@ -8,6 +8,35 @@
     <h4>{{ object.show_full_name }}</h4>
     <a href="{% url 'core:person_update' person.id %}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">Edit</a>
      <a href="{% url 'core:person_delete' person.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button">Delete</a>
+     <p>VIAF: 
+      {% if object.viaf_id %}
+          <a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">
+              {{ object.viaf_id }}
+          </a>
+      {% else %}
+          N/A
+      {% endif %}
+  </p>
+     <p>New VIAF: 
+      {% if object.viaf_id_alternative %}
+          <a href="https://viaf.org/viaf/{{ object.viaf_id_alternative }}/" target="_blank">
+              {{ object.viaf_id_alternative }}
+          </a>
+      {% else %}
+          N/A
+      {% endif %}
+  </p>
+  
+  <p>Wikidata: 
+      {% if object.wikidata_id %}
+          <a href="https://www.wikidata.org/wiki/{{ object.wikidata_id }}" target="_blank">
+              {{ object.wikidata_id }}
+          </a>
+      {% else %}
+          N/A
+      {% endif %}
+  </p>
+  
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0"><small>
