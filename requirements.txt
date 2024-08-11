@@ -4,7 +4,7 @@ branca==0.7.2
 certifi==2024.6.2
 charset-normalizer==3.3.2
 click==8.1.7
-crispy-bootstrap4==2022
+crispy-bootstrap4==2022.1
 dash==2.9.3
 dash-bootstrap-components==1.6.0
 dash-core-components==2.0.0
