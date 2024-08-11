@@ -6,60 +6,61 @@
 <div class="card">
   <div class="card-header">
     <h4>{{ object.show_full_name }}</h4>
-    <a href="{% url 'core:person_update' person.id %}" class="btn btn-secondary btn-sm" tabindex="-1" role="button">Edit</a>
-     <a href="{% url 'core:person_delete' person.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1" role="button">Delete</a>
-     <p>VIAF: 
+    <a href="{% url 'core:person_update' person.id %}" class="btn btn-secondary btn-sm" tabindex="-1"
+      role="button">Edit</a>
+    <a href="{% url 'core:person_delete' person.id %}" class="btn btn-outline-danger btn-sm" tabindex="-1"
+      role="button">Delete</a>
+    <p>VIAF ID:
       {% if object.viaf_id %}
-          <a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">
-              {{ object.viaf_id }}
-          </a>
+      <a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">
+        {{ object.viaf_id }}
+      </a>
       {% else %}
-          N/A
+      N/A
       {% endif %}
-  </p>
-  <p>{% if viaf_data %}
-    <h5>VIAF Information</h5>
-    <pre>{{ viaf_data|json_script:"viaf-data" }}</pre>
-    {% endif %}
-  </p>
-     <p>New VIAF: 
+      VIAF Name: {{ viaf_data }}.
+
+
+      New VIAF:
       {% if object.viaf_id_alternative %}
-          <a href="https://viaf.org/viaf/{{ object.viaf_id_alternative }}/" target="_blank">
-              {{ object.viaf_id_alternative }}
-          </a>
+      <a href="https://viaf.org/viaf/{{ object.viaf_id_alternative }}/" target="_blank">
+        {{ object.viaf_id_alternative }}
+      </a>
       {% else %}
-          N/A
+      N/A
       {% endif %}
-  </p>
-  
-  <p>Wikidata: 
+
+      Wikidata:
       {% if object.wikidata_id %}
-          <a href="https://www.wikidata.org/wiki/{{ object.wikidata_id }}" target="_blank">
-              {{ object.wikidata_id }}
-          </a>
+      <a href="https://www.wikidata.org/wiki/{{ object.wikidata_id }}" target="_blank">
+        {{ object.wikidata_id }}
+      </a>
       {% else %}
-          N/A
+      N/A
       {% endif %}
-  </p>
+
 
       <!-- Display Wikidata data if available -->
-      <h5>Wikidata Information</h5>
-      <pre>{{wikidata_data }}</pre>
-  
+      Wikidata Name: {{ wikidata_data }}.
+
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0"><small>
-      <ul>
-      {% for event in object.event.all %}
-      <li><b><a href="{% url 'core:one_event' event.id %}">{{ event.date }}</a></b> {{event.description|truncatewords:300}} </li>
-      <p>{% for p in event.people.all %} <a href="{% url 'core:one_person' p.id %}" class="btn btn-outline-secondary">{{p.show_full_name}} </a> {% endfor %}</p>
-      {% endfor %}</small>
-    </ul>
-      <footer class="blockquote-footer">{{ object.name }} {% for adress in object.show_adresses %} <cite>/ {{ adress.name }} {% endfor %} </cite></footer>
+        <ul>
+          {% for event in object.event.all %}
+          <li><b><a href="{% url 'core:one_event' event.id %}">{{ event.date }}</a></b>
+            {{event.description|truncatewords:300}} </li>
+          <p>{% for p in event.people.all %} <a href="{% url 'core:one_person' p.id %}"
+              class="btn btn-outline-secondary">{{p.show_full_name}} </a> {% endfor %}</p>
+          {% endfor %}
+      </small>
+      </ul>
+      <footer class="blockquote-footer">{{ object.name }} {% for adress in object.show_adresses %} <cite>/ {{
+          adress.name }} {% endfor %} </cite></footer>
     </blockquote>
   </div>
 </div>
 
 
-	
+
 {% endblock %}

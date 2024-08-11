@@ -1,5 +1,6 @@
 import os
 import random
+import requests
 import markdown
 
 from django.contrib.auth.views import LoginView
@@ -176,6 +177,54 @@ class PlaceDetailView(DetailView):
 
 class PersonDetailView(DetailView):
     model = Person
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        person = self.object
+
+        # Fetch VIAF data if the VIAF ID exists
+        if person.viaf_id:
+            print(person.viaf_id)
+            viaf_data = self.fetch_viaf_data(person.viaf_id)
+            context['viaf_data'] = viaf_data
+
+        # Fetch Wikidata data if the Wikidata ID exists
+        if person.wikidata_id:
+            wikidata_data = self.fetch_wikidata_data(person.wikidata_id)
+            context['wikidata_data'] = wikidata_data
+
+        return context
+
+    def fetch_viaf_data(self, viaf_id):
+        url = f'https://viaf.org/viaf/{viaf_id}/viaf.json'
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            main_headings = response.json().get("mainHeadings", {}).get("data", [])
+            if isinstance(main_headings, list) and main_headings:
+                name = main_headings[0].get("text")
+            elif isinstance(main_headings, dict):
+                name = main_headings.get("text")
+                # Return the first entry as the main name
+            else:
+                name = None
+            return name
+
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching VIAF data: {e}")
+            return None
+
+    def fetch_wikidata_data(self, wikidata_id):
+        url = f'https://www.wikidata.org/wiki/Special:EntityData/{wikidata_id}.json'
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            entity = response.json().get("entities", {}).get(wikidata_id, {})
+            russian_label = entity.get("labels", {}).get("ru", {}).get("value")
+            return russian_label
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching Wikidata data: {e}")
+            return None
 
 
 class EventListView(ListView):
