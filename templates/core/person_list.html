@@ -7,13 +7,18 @@
 <small><a href='{% url "core:persons_order" %}'>По фамилии</a></small> | <small><a href='{% url "core:persons" %}'>По активности</a></small>
 
 <ul>
-	{% for object in object_list %}
-	{% if object.name or object.family %}
-	<li><a href="{% url 'core:one_person' object.id %}">{{ object.show_full_name }} ({{object.event.all.count}}) </a></li>
-	{% else %}
-	<li><a href="">{{ object.date|date:"DATE_FORMAT" }}</a></li>
-	{% endif %}
-	{% endfor %}
+    {% for object in object_list %}
+        <li>
+            {% if object.name or object.family %}
+                <a href="{% url 'core:one_person' object.id %}">{{ object.show_full_name }} ({{object.event.all.count}})</a>
+                {% if object.wikidata_id %}<a href="https://www.wikidata.org/wiki/{{ object.wikidata_id }}" target="_blank">{{ object.wikidata_id }}</a>{% endif %}
+                {% if object.viaf_id %}<a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">{{ object.viaf_id }}</a>{% else %}N/A{% endif %}
+                VIAF Name: {{ object.viaf_name }}
+            {% else %}
+                <a href="">{{ object.date|date:"DATE_FORMAT" }}</a>
+            {% endif %}
+        </li>
+    {% endfor %}
 </ul>
 
 
