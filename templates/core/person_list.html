@@ -11,9 +11,8 @@
         <li>
             {% if object.name or object.family %}
                 <a href="{% url 'core:one_person' object.id %}">{{ object.show_full_name }} ({{object.event.all.count}})</a>
-                {% if object.wikidata_id %}<a href="https://www.wikidata.org/wiki/{{ object.wikidata_id }}" target="_blank">{{ object.wikidata_id }}</a>{% endif %}
-                {% if object.viaf_id %}<a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">{{ object.viaf_id }}</a>{% else %}N/A{% endif %}
-                VIAF Name: {{ object.viaf_name }}
+                {% if object.wikidata_id %}<a href="https://www.wikidata.org/wiki/{{ object.wikidata_id }}" target="_blank">Wikidata</a>{% endif %}
+                {% if object.viaf_id %}<a href="https://viaf.org/viaf/{{ object.viaf_id }}/" target="_blank">VIAF: {{ object.viaf_name }}</a>{% else %}N/A{% endif %}
             {% else %}
                 <a href="">{{ object.date|date:"DATE_FORMAT" }}</a>
             {% endif %}
