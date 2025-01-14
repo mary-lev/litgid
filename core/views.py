@@ -280,7 +280,7 @@ class PersonSearch(PersonListView):
 class PersonUpdate(LoginRequiredMixin, UpdateView):
     """Редактируем все имена одного персонажа."""
     model = Person
-    fields = ['name', 'second_name', 'family', 'pseudonym', 'viaf_id', 'wikidata_id', 'transliterated_name']
+    fields = ['name', 'second_name', 'family', 'pseudonym', 'viaf_id', 'viaf_name', 'wikidata_id', 'transliterated_name']
 
     def form_invalid(self, form):
         events = Event.objects.filter(people__id=self.object.id).all()
